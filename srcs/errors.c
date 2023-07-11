@@ -6,7 +6,7 @@
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 19:35:38 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/10 20:26:04 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/07/11 17:58:54 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,14 @@ void	error_exit()
 	exit (0);
 }
 
-int	check_iput(char *argv[], int argc)
+int	input_check(char *argv[], int argc)
 {
 	int	index;
 
 	if (!argc)
 		error_exit();
-	while (argc--)
-	{
-		while (argv[index] != 
-		//only allow digets
-		//atoi
-	}
-
+	while (argv[index])
+		ft_putstr_fd(1, argv[index]);
+	return (1);
 }
 

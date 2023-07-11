@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-t_node	 *ft_lstnew(void *content)
+t_node	 *ft_lstnew(int	content)
 {
     t_node *newNode = (t_node *)malloc(sizeof(t_node));
     newNode->content = content;
@@ -18,20 +18,35 @@ t_node	 *ft_lstnew(void *content)
     newNode->prev = NULL;
     return newNode;
 }
-void ft_lstadd_back(t_list *list, t_node *node)
-{
+int	ft_lstadd_back(t_list *list, t_node *node)
+{	
+	t_node	*temp;
+
 	list->size += 1;
-    if (list->head == NULL)
-    {
-        list->head = node;
-        list->tail = node;
-    }
-    else
-    {
-        node->prev = list->tail;
-        list->tail->next = node;
-        list->tail = node;
-    }
+	if (list->head == NULL)
+	{
+		list->head = node;
+		list->tail = node;
+	}
+	else
+	{	temp = list->head;
+		while (temp->next != NULL)
+		{	
+			if (temp->content == node->content) 
+			{	free(node);
+				return (-1);
+			}
+			temp = temp->next;
+		}
+		if (temp->content == node->content)
+		{       free(node);
+			return (-1);
+		}
+        	node->prev = list->tail;
+        	list->tail->next = node;
+        	list->tail = node;
+	}
+	return (0);
 }
 
 void ft_list_init(t_list *list)
@@ -54,7 +69,7 @@ void displayList(t_list *list)
     printf("Linked List: ");
     while (currentNode != NULL)
     {
-        printf("%d ", *(int*)currentNode->content);
+        printf("%d ", currentNode->content);
         currentNode = currentNode->next;
     }
     printf("\nSize: %d\n", list->size);
