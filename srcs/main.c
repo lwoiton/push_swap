@@ -6,71 +6,63 @@
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:57:19 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/11 17:56:22 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/07/12 17:28:20 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(char *argv[], int argc)
+void swap(int *a, int *b)
 {
-	input_check(argv, argc);
-	TODO("IMPLEMENT: input_check(argv, argc);");
-	TODO("IMPLEMENT: read_input(argv, argc);");
-    return 0;
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
-/*
-int	example_list()
+
+void	chunk_builder(t_list *list)
 {
-    t_list list;
-    ft_list_init(&list);
+	int	*sorted_list;
+	int	i;
+	t_node	*tmp;
 
-    int num1 = 1;
-    int num2 = 21;
-    int num3 = 61;
-    int num4 = 81;
-    int num5 = 81;
-    int num6 = 2;
-    int num7 = 3;
-
-    if(ft_lstadd_back(&list, ft_lstnew(num1)) == -1)
-    {
-	    printf("NOT UNIQUE\n");
-	    return -1;
-    }
-    if(ft_lstadd_back(&list, ft_lstnew(num2)) == -1)
-    {
-            printf("NOT UNIQUE\n");
-            return -1;
-    }
-    if(ft_lstadd_back(&list, ft_lstnew(num3)) == -1)
-    {
-            printf("NOT UNIQUE\n");
-            return -1;
-    }
-    if(ft_lstadd_back(&list, ft_lstnew(num4)) == -1)
-    {
-            printf("NOT UNIQUE\n");
-            return -1;
-    }
-    if(ft_lstadd_back(&list, ft_lstnew(num5)) == -1)
-    {
-            printf("NOT UNIQUE\n");
-            return -1;
-    }
-    if(ft_lstadd_back(&list, ft_lstnew(num6)) == -1)
-    {
-            printf("NOT UNIQUE\n");
-            return -1;
-    }
-    if(ft_lstadd_back(&list, ft_lstnew(num7)) == -1)
-    {
-            printf("NOT UNIQUE\n");
-            return -1;
-    }
- 
-    displayList(&list);
-
-	return (0);
+	sorted_list = (int*)malloc(list->size * sizeof(int));
+	i = 0;
+	tmp = list->head;
+	while(i < list->size)
+	{
+		sorted_list[i] = tmp->content;
+		tmp = tmp->next;
+		++i;
+	}
+	ft_sort_int_tab(sorted_list, list->size);
 }
-*/
+
+
+int main(int argc, char* argv[])
+{	
+	t_list list;
+	char	**parsed_params;
+	int	i;
+
+	ft_list_init(&list);
+	if (argc < 2) {
+        	ft_printf("No input string provided.\n");
+        	return 1;
+	}
+	else if (argc == 2)
+	{
+		i = 0;
+		parsed_params = ft_split(argv[1], ' ');
+		while (parsed_params[i] != NULL)
+		{
+			ft_lstadd_back(&list, ft_lstnew(ft_atoi(parsed_params[i])));
+			++i;
+		}	
+	}
+	else
+	{
+	
+	}
+	displayList(&list);
+    	return 0;
+}

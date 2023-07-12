@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+# include "push_swap.h"
+
 t_node	 *ft_lstnew(int	content)
 {
     t_node *newNode = (t_node *)malloc(sizeof(t_node));
@@ -26,11 +28,12 @@ int	ft_lstadd_back(t_list *list, t_node *node)
 	if (list->head == NULL)
 	{
 		list->head = node;
-		list->tail = node;
+		node->next = node;
+		node->prev = node;
 	}
 	else
 	{	temp = list->head;
-		while (temp->next != NULL)
+		while (temp->next != list->head)
 		{	
 			if (temp->content == node->content) 
 			{	free(node);
@@ -42,9 +45,11 @@ int	ft_lstadd_back(t_list *list, t_node *node)
 		{       free(node);
 			return (-1);
 		}
-        	node->prev = list->tail;
-        	list->tail->next = node;
-        	list->tail = node;
+        	node->next = list->head;
+		list->head->prev = node;
+        	node->prev = temp;
+		temp->next = node;
+
 	}
 	return (0);
 }
@@ -53,7 +58,6 @@ void ft_list_init(t_list *list)
 {
 	list->size = 0;
 	list->head = NULL;
-	list->tail = NULL;
 }
 
 void displayList(t_list *list)
@@ -62,15 +66,16 @@ void displayList(t_list *list)
 
     if (currentNode == NULL)
     {
-        printf("List is empty.\n");
+        ft_printf("List is empty.\n");
         return;
     }
 
-    printf("Linked List: ");
-    while (currentNode != NULL)
+    ft_printf("Linked List: ");
+    while (currentNode->next != list->head)
     {
-        printf("%d ", currentNode->content);
+        ft_printf("%d ", currentNode->content);
         currentNode = currentNode->next;
     }
-    printf("\nSize: %d\n", list->size);
+    ft_printf("%d ", currentNode->content);
+    ft_printf("\nSize: %d\n", list->size);
 }

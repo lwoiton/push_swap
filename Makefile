@@ -6,53 +6,67 @@
 #    By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/11 17:15:14 by lwoiton           #+#    #+#              #
-#    Updated: 2023/07/11 17:17:08 by lwoiton          ###   ########.fr        #
+#    Updated: 2023/07/12 16:26:13 by lwoiton          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Compiler
-CC := gcc
-CFLAGS := -Wall -Wextra -Werror
-CPPFLAGS := -I includes
+# Output file
+NAME = push_swap
+
+# Compiler and flags
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+IFLAGS = -I$(INC_DIR) -I$(LIB_DIR)/incl
 
 # Directories
-SRCDIR := srcs
-OBJDIR := objs
-LIBFTDIR := libft
-BINDIR := .
+SRC_DIR = srcs
+OBJ_DIR = objs
+INC_DIR = incl
+LIB_DIR = libft
 
 # Source files
-SOURCES := $(wildcard $(SRCDIR)/*.c)
-OBJECTS := $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SOURCES))
+SRC_FILES = main.c \
+            linked_list_utils.c \
+            ft_sort_int_tab.c\
+
+# Object files
+OBJ_FILES = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
 # Libraries
-LIBFT := $(LIBFTDIR)/libft.a
+LIBFT = $(LIB_DIR)/libft.a
 
-# Binary name
-TARGET := push_swap
+# Default target
+all: $(NAME)
 
-# Rules
-all: $(BINDIR)/$(TARGET)
+# Rule to build the executable
+$(NAME): $(OBJ_FILES) $(LIBFT)
+	$(CC) $(CFLAGS) $(IFLAGS) -o $@ $^
 
-$(BINDIR)/$(TARGET): $(OBJECTS) $(LIBFT)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
+# Rule to build object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(IFLAGS) -c -o $@ $<
 
-$(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
-	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-
+# Rule to create the object directory
+$(OBJ_DIR):
+	mkdir -p $@
+	
+# Rule to build the libft library	
 $(LIBFT):
-	$(MAKE) -C $(LIBFTDIR)
+	$(MAKE) -C $(LIB_DIR)
 
+# Clean generated files
 clean:
-	rm -rf $(OBJDIR)
-	$(MAKE) -C $(LIBFTDIR) clean
+	$(MAKE) -C $(LIB_DIR) clean
+	rm -rf $(OBJ_DIR)
 
+# Clean everything
 fclean: clean
-	rm -f $(BINDIR)/$(TARGET)
-	$(MAKE) -C $(LIBFTDIR) fclean
+	$(MAKE) -C $(LIB_DIR) fclean
+	rm -f $(NAME)
 
+# Clean and build everything
 re: fclean all
 
+# Phony targets
 .PHONY: all clean fclean re
 
