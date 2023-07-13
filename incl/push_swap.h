@@ -23,7 +23,7 @@
 typedef struct s_node
 {
 	int	content;
-	int	index;
+	int	rank;
 	struct s_node	*next;
 	struct s_node	*prev;
 }	t_node;
@@ -48,5 +48,6 @@ void ft_list_init(t_list *list);
 void displayList(t_list *list);
 void	chunk_builder(t_list *list);
 void    ft_sort_int_tab(int *tab, int size);
+int	push(t_list *dst, t_list *src);
 
 #endif

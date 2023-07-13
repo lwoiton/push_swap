@@ -6,7 +6,7 @@
 #    By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/11 17:15:14 by lwoiton           #+#    #+#              #
-#    Updated: 2023/07/12 16:26:13 by lwoiton          ###   ########.fr        #
+#    Updated: 2023/07/13 15:44:35 by lwoiton          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ LIB_DIR = libft
 
 # Source files
 SRC_FILES = main.c \
-            linked_list_utils.c \
             ft_sort_int_tab.c\
+            #linked_list_utils.c \
 
 # Object files
 OBJ_FILES = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
