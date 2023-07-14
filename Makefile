@@ -16,6 +16,7 @@ NAME = push_swap
 # Compiler and flags
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
+DFLAGS = -g
 IFLAGS = -I$(INC_DIR) -I$(LIB_DIR)/incl
 
 # Directories
@@ -40,11 +41,11 @@ all: $(NAME)
 
 # Rule to build the executable
 $(NAME): $(OBJ_FILES) $(LIBFT)
-	$(CC) $(CFLAGS) $(IFLAGS) -o $@ $^
+	$(CC) $(DFLAGS) $(CFLAGS) $(IFLAGS) -o $@ $^
 
 # Rule to build object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(IFLAGS) -c -o $@ $<
+	$(CC) $(DFLAGS) $(CFLAGS) $(IFLAGS) -c -o $@ $<
 
 # Rule to create the object directory
 $(OBJ_DIR):

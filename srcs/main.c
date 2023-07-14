@@ -6,7 +6,7 @@
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:57:19 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/12 17:28:20 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/07/14 16:57:39 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,15 @@ void	chunk_builder(t_list *A)
 		i++;
 	}
 	i = 0;
-	tmp = A->head;
-	while (tmp->next != A->head)
-	{
-		ft_printf("%d(%d,%d) ",tmp->content, tmp->rank, tmp->rank/2);
-		tmp = tmp ->next;
-	}
-	if (tmp->next == A->head)
-		ft_printf("%d(%d,%d) ",tmp->content, tmp->rank, tmp->rank/2);
-	i = 0;
-	while (i < A->size)
+	ft_printf("BEFORE PUSH\n");
+	displayList(A);
+	displayList(&B);
+	while (i < 5)
 	{
 		push(&B, A);
 		i++;
 	}
+	ft_printf("AFTER PUSH\n");
 	displayList(A);
 	displayList(&B);
 }
@@ -110,7 +105,11 @@ int	swap(t_list *list)
 
 int	push(t_list *dst, t_list *src)
 {
-	if (dst->head == NULL)
+	//t_node	*tmp_src;
+
+	if (src->size == 0)
+		return (-1);
+	if (dst->head == NULL )
 	{
 		dst->head = src->head;
 		src->head->next->prev = src->head->prev;
@@ -121,13 +120,17 @@ int	push(t_list *dst, t_list *src)
 	}
 	else
 	{
-		dst->head->next->prev = src->head;
-		dst->head->prev->next = src->head;
-		dst->head = src->head;
 		src->head->next->prev = src->head->prev;
 		src->head->prev->next = src->head->next;
+		dst->head->prev->next = src->head;
+		src->head->prev = dst->head->prev;
+		dst->head->prev = src->head;
 		src->head = src->head->next;
+		dst->head->prev->next = dst->head;
+		dst->head = dst->head->prev;
 	}
+	dst->size += 1;
+	src->size -= 1;
 	return (0);
 }
 
@@ -187,14 +190,13 @@ void displayList(t_list *list)
         ft_printf("List is empty.\n");
         return;
     }
-
     ft_printf("Linked List: ");
     while (currentNode->next != list->head)
     {
-        ft_printf("%d(%d) ", currentNode->content, currentNode->rank);
+		ft_printf("%d(%d,%d) ",currentNode->content, currentNode->rank, currentNode->rank/2);
         currentNode = currentNode->next;
     }
-    ft_printf("%d(%d) ", currentNode->content, currentNode->rank);
+	ft_printf("%d(%d,%d)\n",currentNode->content, currentNode->rank, currentNode->rank/2);
     ft_printf("\nSize: %d\n", list->size);
 }
 
