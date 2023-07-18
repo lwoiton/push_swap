@@ -6,7 +6,7 @@
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:57:19 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/14 16:57:39 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/07/18 14:23:47 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,35 +31,91 @@ void	chunk_builder(t_list *A)
 		++i;
 	}
 	ft_sort_int_tab(sorted_A, A->size);
-	displayList(A);
+	i = 0;
+	while (i < A->size)
+	{
+		ft_printf("RANK: %d, CONTENT: %d\n", i, sorted_A[i]);
+		i++;
+	}
 	//Build indexes in the linked list in another while loop
 	
 	i = 0;
 	tmp = A->head;
-	while (i <= A->size)
+	while (tmp->next != A->head)
 	{
 		j = 0;
-		while (j <= A->size)
+		while (j < A->size)
 		{
 			if (sorted_A[j] == tmp->content)
+			{
 				tmp->rank = j;
+				break;
+			}
 			j++;
 		}
 		tmp = tmp->next;
-		i++;
+	}
+	if (tmp->next == A->head)
+	{
+		j = 0;
+		while (j < A->size)
+		{
+			if (sorted_A[j] == tmp->content)
+			{
+				tmp->rank = j;
+				break;
+			}
+			j++;
+		}
 	}
 	i = 0;
-	ft_printf("BEFORE PUSH\n");
-	displayList(A);
-	displayList(&B);
-	while (i < 5)
+	//displayList(A);
+	//ft_printf("BEFORE PUSH\n");	
+	partition(A, &B);
+	/*
+	while (i < (A->size + B.size))
 	{
 		push(&B, A);
+		ft_printf("pb\n");
 		i++;
 	}
-	ft_printf("AFTER PUSH\n");
-	displayList(A);
-	displayList(&B);
+	*/
+	//ft_printf("AFTER PUSH\n");
+}
+
+int	partition(t_list *A, t_list *B)
+{
+	int		chunk_size;
+	int		curr_chunk;
+
+	chunk_size = (A->size + CHUNK_NR - 1) / CHUNK_NR;
+	curr_chunk = 0;
+	while (A->size > 3)
+	{
+		if (A->head->rank / chunk_size == curr_chunk)
+		{
+			push(B, A);
+			ft_printf("pb\n");
+		}
+		/*
+		else if(A->head->rank / chunk_size == curr_chunk + 1)
+		{
+			push(B, A);
+			ft_printf("pb\n");
+			B->head = B->head->prev;
+			ft_printf("rb\n");
+		}
+		*/
+		else
+		{
+			A->head = A->head->next;
+			ft_printf("ra\n");
+		}
+		if (B->size / chunk_size != curr_chunk)
+			curr_chunk++;
+		displayList(A);
+	}
+	return (0);
 }
 
 int	rotate_single(t_list *list)
@@ -105,8 +161,6 @@ int	swap(t_list *list)
 
 int	push(t_list *dst, t_list *src)
 {
-	//t_node	*tmp_src;
-
 	if (src->size == 0)
 		return (-1);
 	if (dst->head == NULL )
@@ -193,10 +247,10 @@ void displayList(t_list *list)
     ft_printf("Linked List: ");
     while (currentNode->next != list->head)
     {
-		ft_printf("%d(%d,%d) ",currentNode->content, currentNode->rank, currentNode->rank/2);
+	ft_printf("%d(%d,%d) ",currentNode->content, currentNode->rank, currentNode->rank/CHUNK_NR);
         currentNode = currentNode->next;
     }
-	ft_printf("%d(%d,%d)\n",currentNode->content, currentNode->rank, currentNode->rank/2);
+	ft_printf("%d(%d,%d)\n",currentNode->content, currentNode->rank, currentNode->rank/CHUNK_NR);
     ft_printf("\nSize: %d\n", list->size);
 }
 

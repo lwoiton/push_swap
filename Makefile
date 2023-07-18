@@ -6,7 +6,7 @@
 #    By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/11 17:15:14 by lwoiton           #+#    #+#              #
-#    Updated: 2023/07/13 15:44:35 by lwoiton          ###   ########.fr        #
+#    Updated: 2023/07/18 14:16:16 by lwoiton          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ NAME = push_swap
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -g
-IFLAGS = -I$(INC_DIR) -I$(LIB_DIR)/incl
+IFLAGS = -I$(INC_DIR) -I$(LIB_DIR)/$(INC_DIR)
+
 
 # Directories
 SRC_DIR = srcs
@@ -44,7 +45,7 @@ $(NAME): $(OBJ_FILES) $(LIBFT)
 	$(CC) $(DFLAGS) $(CFLAGS) $(IFLAGS) -o $@ $^
 
 # Rule to build object files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c incl/push_swap.h | $(OBJ_DIR)
 	$(CC) $(DFLAGS) $(CFLAGS) $(IFLAGS) -c -o $@ $<
 
 # Rule to create the object directory

@@ -19,10 +19,10 @@ void	ft_sort_int_tab(int *tab, int size)
 	int	buff;
 
 	i = 0;
-	while (tab[i] != tab[size])
+	while (i < size - 1)
 	{	
 		cur = i + 1;
-		while (tab[cur] != tab[size])
+		while (cur < size)
 		{
 			if (tab[i] > tab[cur])
 			{

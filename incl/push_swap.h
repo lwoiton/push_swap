@@ -6,7 +6,7 @@
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 19:05:04 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/12 17:28:57 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/07/18 14:24:32 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "ft_printf.h"
 
 #define TODO(s) ft_printf("%s:%s:%d: %s\n", __FILE__, __func__, __LINE__, s);
+#define CHUNK_NR 3
+
 
 typedef struct s_node
 {
@@ -49,5 +51,7 @@ void displayList(t_list *list);
 void	chunk_builder(t_list *list);
 void    ft_sort_int_tab(int *tab, int size);
 int	push(t_list *dst, t_list *src);
+int	partition(t_list *A, t_list *B);
+int	rotate_single(t_list *list);
 
 #endif
