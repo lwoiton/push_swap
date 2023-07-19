@@ -3,3 +3,4 @@ checker_linux
 libft/objs
 libft/libft.a
 push_swap_visualizer/
+*.o

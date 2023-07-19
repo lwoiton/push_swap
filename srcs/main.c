@@ -6,7 +6,7 @@
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:57:19 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/18 14:23:47 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/07/19 19:07:29 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,8 @@ void	chunk_builder(t_list *A)
 		++i;
 	}
 	ft_sort_int_tab(sorted_A, A->size);
-	i = 0;
-	while (i < A->size)
-	{
-		ft_printf("RANK: %d, CONTENT: %d\n", i, sorted_A[i]);
-		i++;
-	}
-	//Build indexes in the linked list in another while loop
-	
+
+	//Build indexes in the linked list in another while loop	
 	i = 0;
 	tmp = A->head;
 	while (tmp->next != A->head)
@@ -68,95 +62,133 @@ void	chunk_builder(t_list *A)
 			j++;
 		}
 	}
-	i = 0;
-	//displayList(A);
-	//ft_printf("BEFORE PUSH\n");	
 	partition(A, &B);
-	/*
-	while (i < (A->size + B.size))
+	sort_three(A);
+}
+
+int	sort_three(t_list *A)
+{
+	if (A->head->content > A->head->next->content && \
+			A->head->content > A->head->next->next->content)
 	{
-		push(&B, A);
-		ft_printf("pb\n");
-		i++;
+		rotate1(A);
+		ft_printf("ra\n");
 	}
-	*/
-	//ft_printf("AFTER PUSH\n");
+	else if (A->head->next->content > A->head->content && \
+			A->head->next->content > A->head->next->next->content)
+	{
+		reverse_rotate1(A);
+		ft_printf("rra\n");
+	}
+	if (A->head->content > A->head->next->content)
+	{
+		swap(A);
+		ft_printf("sa\n");
+	}
+	return (0);
+}
+
+int	calculate_costs(t_list *A, t_list *B)
+{
+	t_node *cpy_A;
+	t_node *cpy_B;
+
+	cpy_A = A->head;
+	cpy_B = A->head;
+	
+	while (cpy_B->next != B->head)
+	{
+		if (
+	}
+	return (0);	
 }
 
 int	partition(t_list *A, t_list *B)
 {
 	int		chunk_size;
-	int		curr_chunk;
+	int		upper_curr_chunk;
+	int		lower_curr_chunk;
+	int		upper_chunk_counter;
+	int		lower_chunk_counter;
 
 	chunk_size = (A->size + CHUNK_NR - 1) / CHUNK_NR;
-	curr_chunk = 0;
+	upper_curr_chunk = 0;
+	lower_curr_chunk = 1;
+	upper_chunk_counter = 0;
+	lower_chunk_counter = 0;
 	while (A->size > 3)
 	{
-		if (A->head->rank / chunk_size == curr_chunk)
+		if (A->head->rank / chunk_size == upper_curr_chunk &&\
+				A->head->rank < (A->size + B->size) - 3)
 		{
 			push(B, A);
 			ft_printf("pb\n");
+			upper_chunk_counter++;
 		}
-		/*
-		else if(A->head->rank / chunk_size == curr_chunk + 1)
+		else if(A->head->rank / chunk_size == lower_curr_chunk &&\
+				A->head->rank < (A->size + B->size) - 3)
 		{
 			push(B, A);
 			ft_printf("pb\n");
-			B->head = B->head->prev;
+			rotate1(B);
 			ft_printf("rb\n");
+			lower_chunk_counter++;
 		}
-		*/
 		else
 		{
 			A->head = A->head->next;
 			ft_printf("ra\n");
 		}
-		if (B->size / chunk_size != curr_chunk)
-			curr_chunk++;
-		displayList(A);
+		if (upper_chunk_counter == chunk_size)
+		{
+			upper_chunk_counter = 0;
+			upper_curr_chunk += 2;
+		}
+		else if (lower_chunk_counter == chunk_size)
+		{
+			lower_chunk_counter = 0;
+			lower_curr_chunk += 2;
+		}
 	}
 	return (0);
 }
 
-int	rotate_single(t_list *list)
+int	rotate1(t_list *list)
 {
 	list->head = list->head->next;
 	return (0);
 }
 
-int	rotate_both(t_list *list_a, t_list *list_b)
+int	rotate2(t_list *list_A, t_list *list_B)
 {
-	list_a->head = list_a->head->next;
-	list_b->head = list_b->head->next;
+	list_A->head = list_A->head->next;
+	list_B->head = list_B->head->next;
 	return (0);
 }
 
-int	reverse_rotate_single(t_list *list)
+int	reverse_rotate1(t_list *list)
 {
 	list->head = list->head->prev;
 	return (0);
 }
 
-int	reverse_rotate_both(t_list *list_a, t_list *list_b)
+int	reverse_rotate2(t_list *list_A, t_list *list_B)
 {
-	list_a->head = list_a->head->prev;
-	list_b->head = list_b->head->prev;
+	list_A->head = list_A->head->prev;
+	list_B->head = list_B->head->prev;
 	return (0);
 }
 
-int	swap(t_list *list)
+int swap(t_list *list)
 {
-	int	tmp_val;
-	int	tmp_rank;
-	
-	tmp_val = list->head->content;
-	list->head->content = list->head->next->content;
-	list->head->next->content = tmp_val;
-	
-	tmp_rank = list->head->rank;
-	list->head->rank = list->head->next->rank;
-	list->head->next->rank = tmp_rank;
-	return (0);
+    list->head->prev->next = list->head->next;
+    list->head->next->prev = list->head->prev;
+    list->head->prev = list->head->next;
+    list->head->next = list->head->next->next;
+    list->head->prev->next = list->head;
+    list->head->next->prev = list->head;
+    list->head = list->head->prev;
+    return (0);
 }
 
 int	push(t_list *dst, t_list *src)
@@ -196,6 +228,12 @@ t_node	 *ft_lstnew(int	content)
     if (!newNode)
     	return (NULL);
     newNode->content = content;
+	newNode->rank = 0;
+	newNode->cost = 0;
+	newNode->ra = -1;
+	newNode->rb = -1;
+	newNode->rra = -1;
+	newNode->rrb = -1;
     newNode->next = NULL;
     newNode->prev = NULL;
     return newNode;
@@ -237,8 +275,10 @@ void ft_list_init(t_list *list)
 
 void displayList(t_list *list)
 {
-    t_node *currentNode = list->head;
+    t_node 	*currentNode = list->head;
+	int		chunk_size;
 
+	chunk_size = (list->size + CHUNK_NR - 1) / CHUNK_NR;
     if (currentNode == NULL)
     {
         ft_printf("List is empty.\n");
@@ -247,10 +287,10 @@ void displayList(t_list *list)
     ft_printf("Linked List: ");
     while (currentNode->next != list->head)
     {
-	ft_printf("%d(%d,%d) ",currentNode->content, currentNode->rank, currentNode->rank/CHUNK_NR);
+	ft_printf("%d(%d,%d) ",currentNode->content, currentNode->rank, currentNode->rank/chunk_size);
         currentNode = currentNode->next;
     }
-	ft_printf("%d(%d,%d)\n",currentNode->content, currentNode->rank, currentNode->rank/CHUNK_NR);
+	ft_printf("%d(%d,%d)\n",currentNode->content, currentNode->rank, currentNode->rank/chunk_size);
     ft_printf("\nSize: %d\n", list->size);
 }
 

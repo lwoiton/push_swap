@@ -6,7 +6,7 @@
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 19:05:04 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/18 14:24:32 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/07/19 18:26:47 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,20 @@
 # include "ft_printf.h"
 
 #define TODO(s) ft_printf("%s:%s:%d: %s\n", __FILE__, __func__, __LINE__, s);
-#define CHUNK_NR 3
-
+#define CHUNK_NR 8
+#define INT_MAX 2147483647
+#define INT_MIN -2147483648
 
 typedef struct s_node
 {
 	int	content;
 	int	rank;
+	int	cost;
+	int	ra;
+	int	rb;
+	int	rra;
+	int	rrb;
+	int	min_rotations_b;
 	struct s_node	*next;
 	struct s_node	*prev;
 }	t_node;
@@ -50,8 +57,13 @@ void ft_list_init(t_list *list);
 void displayList(t_list *list);
 void	chunk_builder(t_list *list);
 void    ft_sort_int_tab(int *tab, int size);
-int	push(t_list *dst, t_list *src);
 int	partition(t_list *A, t_list *B);
-int	rotate_single(t_list *list);
+int	sort_three(t_list *A);
+int	swap(t_list *list);
+int	push(t_list *dst, t_list *src);
+int	rotate1(t_list *list);
+int	rotate2(t_list *list_A, t_list *list_B);
+int	reverse_rotate1(t_list *list);
+int	reverse_rotate2(t_list *list_A, t_list *list_B);
 
 #endif
