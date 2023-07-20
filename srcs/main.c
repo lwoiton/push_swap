@@ -6,7 +6,7 @@
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:57:19 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/19 19:07:29 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/07/20 11:11:01 by luca             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,19 @@ int	sort_three(t_list *A)
 
 int	calculate_costs(t_list *A, t_list *B)
 {
-	t_node *cpy_A;
-	t_node *cpy_B;
+	t_node *B_tmp;
+	int		count;
 
-	cpy_A = A->head;
-	cpy_B = A->head;
-	
-	while (cpy_B->next != B->head)
+	B_tmp = B->head;
+	count = 0;
+	while (B_tmp->next != B->head)
 	{
-		if (
+		if (count > B->size / 2)
+		{
+			B_tmp->rrb = B_tmp->rb;
+			B_tmp_>rb = 0;
+		}
+		cout++;
 	}
 	return (0);	
 }
