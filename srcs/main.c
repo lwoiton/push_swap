@@ -6,7 +6,7 @@
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:57:19 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/20 11:11:01 by luca             ###   ########.fr       */
+/*   Updated: 2023/07/20 17:08:44 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,79 @@ void	chunk_builder(t_list *A)
 	}
 	partition(A, &B);
 	sort_three(A);
+	while (B->size > 0)
+	{
+		calculate_rotations(A, B);
+		calculate_costs(B);
+		selected_node = find_min_cost(B);
+		execute(A, B, selected_node);
+	}
+}
+
+int	execute(t_list *A, t_list *B, t_node *sel_node)
+{
+	while (sel_node->ra > 0 && sel_node->rb > 0)
+	{
+		rotate2(A, B);
+		ft_printf("rr\n");
+		sel_node->ra--;
+		sel_node->rb--;
+	}
+	while (sel_node->rra > 0 && sel_node->rrb > 0)
+	{
+		rotate2(A, B);
+		ft_printf("rrr\n");
+		sel_node->rra--;
+		sel_node->rrb--;
+	}
+	// DO the same for singular moves
+	// Becareful to also incooperate the remaining moves
+}
+
+t_node	*find_min_cost(t_list *B)
+{
+	t_node	*B_tmp;
+	t_node	*adress_min_cost;
+	int		min_cost;
+
+	B_tmp = B->head;
+	min_cost = B_tmp->cost;
+	while (B_tmp->next != B->head)
+	{
+		if (B_tmp->cost < min_cost)
+		{
+			min_cost = B_tmp->cost;
+			adress_min_cost = B_tmp;
+		}
+		B_tmp = B_tmp->next;
+	}
+	return (adress_min_cost);
+}
+
+int	calculate_costs(t_list *B)
+{
+	t_node *B_tmp;
+
+	B_tmp = B->head;
+	while (B_tmp->next != B->head)
+	{
+		if (B_tmp->ra > 0 && B_tmp->rb > 0)
+			B_tmp->costs = max(B_tmp->ra, B_tmp->rb);
+		else if (B_tmp->rra > 0 && B_tmp->rrb > 0)
+			B_tmp->costs = max(B_tmp->rra, B_tmp->rrb);	
+		else
+			B_tmp->costs = B_tmp->ra + B_tmp->rb + B_tmp->rrb + B_tmp->rra;
+		B_tmp = B_tmp->next;
+	}
+	return (0);
+}
+
+int	max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	else
+		return (b);
 }
 
 int	sort_three(t_list *A)
@@ -88,9 +161,9 @@ int	sort_three(t_list *A)
 	return (0);
 }
 
-int	calculate_costs(t_list *A, t_list *B)
+int	calculate_rotations(t_list *A, t_list *B)
 {
-	t_node *B_tmp;
+	t_node	*B_tmp;
 	int		count;
 
 	B_tmp = B->head;
@@ -99,12 +172,46 @@ int	calculate_costs(t_list *A, t_list *B)
 	{
 		if (count > B->size / 2)
 		{
-			B_tmp->rrb = B_tmp->rb;
-			B_tmp_>rb = 0;
+			B_tmp->rrb = B->size - count;
+			B_tmp->rb = 0;
 		}
+		else
+		{
+			B_tmp->rb = count;
+			B_tmp->rrb = 0;
+		}
+		find_position_in_a(A, B_tmp);
+		B_tmp = B_tmp->next;
 		cout++;
 	}
 	return (0);	
+}
+
+int	find_position_in_a(t_list *A, t_node *curr_B)
+{
+	t_node	*A_tmp;
+	int		count;
+
+	A_tmp = A->head;
+	count = 0;
+	while (A_tmp->next != A->head)
+	{
+		if (A_tmp->next->rank > curr_B->rank && curr_B->rank > A_tmp->prev->rank)
+			break;
+		count++;
+		A_tmp = A_tmp->next;
+	}
+	if (count > A->size / 2)
+	{
+		curr_B->ra = 0;
+		curr_B->rra = A->size - count;
+	}
+	else
+	{
+		curr_B->ra = count;
+		curr_B->rra = 0;
+	}
+	return (0);
 }
 
 int	partition(t_list *A, t_list *B)
