@@ -6,7 +6,7 @@
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:57:19 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/20 17:08:44 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/07/21 12:02:50 by luca             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,33 @@ int	execute(t_list *A, t_list *B, t_node *sel_node)
 		sel_node->rra--;
 		sel_node->rrb--;
 	}
-	// DO the same for singular moves
-	// Becareful to also incooperate the remaining moves
+	while (sel_node->rb > 0)
+	{
+		rotate1(B);
+		ft_printf("rb\n");
+		sel_node->rb--;
+	}
+	while (sel_node->rrb > 0)
+	{
+		rotate1(B);
+		ft_printf("rrb\n");
+		sel_node->rrb--;
+	}
+	push(A,B);
+	ft_printf("pa\n");
+	while (sel_node->ra > 0)
+	{
+		rotate1(A);
+		ft_printf("ra\n");
+		sel_node->ra--;
+	}
+	while (sel_node->rra > 0)
+	{
+		rotate1(A);
+		ft_printf("rra\n");
+		sel_node->rra--;
+	}
+	return (0);
 }
 
 t_node	*find_min_cost(t_list *B)

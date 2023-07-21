@@ -6,7 +6,7 @@
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 19:05:04 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/19 18:26:47 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/07/21 12:07:02 by luca             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,11 @@ int	rotate1(t_list *list);
 int	rotate2(t_list *list_A, t_list *list_B);
 int	reverse_rotate1(t_list *list);
 int	reverse_rotate2(t_list *list_A, t_list *list_B);
+int	execute(t_list *A, t_list *B, t_node *sel_node)
+t_node *find_min_cost(t_list *B);
+int	calculate_costs(t_list *B),
+int	max(int a, int b);
+int	calculate_rotations(t_list *A, t_list *B);
+int	find_position_in_a(t_list *A, t_node *curr_B);
 
 #endif
