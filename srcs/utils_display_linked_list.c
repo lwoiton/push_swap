@@ -12,30 +12,31 @@
 
 #include "push_swap.h"
 
-void displayList(t_list *list)
+void	display_list(t_list *list)
 {
-    t_node 	*curr_N = list->head;
+	t_node	*curr_n;
 	int		chunk_size;
 
+	curr_n = list->head;
 	chunk_size = (list->size + CHUNK_NR - 1) / CHUNK_NR;
-    if (curr_N == NULL)
-    {
-        ft_printf("List is empty.\n");
-        return;
-    }
-    ft_printf("Linked List: ");
-    while (curr_N->next != list->head)
-    {
-	ft_printf("%d(%d,%d) ",curr_N->content, /
-	curr_N->rank, curr_N->rank/chunk_size);
-        curr_N = curr_N->next;
-    }
-	ft_printf("%d(%d,%d)\n",curr_N->content, /
-	curr_N->rank, curr_N->rank/chunk_size);
-    ft_printf("\nSize: %d\n", list->size);
+	if (curr_n == NULL)
+	{
+		ft_printf("List is empty.\n");
+		return ;
+	}
+	ft_printf("Linked List: ");
+	while (curr_n->next != list->head)
+	{
+		ft_printf("%d(%d,%d) ", curr_n->content, \
+			curr_n->rank, curr_n->rank / chunk_size);
+		curr_n = curr_n->next;
+	}
+	ft_printf("%d(%d,%d)\n", curr_n->content, \
+		curr_n->rank, curr_n->rank / chunk_size);
+	ft_printf("\nSize: %d\n", list->size);
 }
 
-void	printStacksHead()
+void	print_stacks_head(void)
 {
 	ft_printf("+---------+------+-------+------+----+----+-----+-----+\
 	   +---------+------+-------+------+----+----+-----+-----+\n");
@@ -45,24 +46,24 @@ void	printStacksHead()
 	   +---------+------+-------+------+----+----+-----+-----+\n");
 }
 
-void	printStackA(t_node *cA, int cs, int sizeA)
+void	print_stack_a(t_node *cA, int cs, int sizeA)
 {
 	if (sizeA)
 	{
 		ft_printf("|%9d|%6d|%7d|%6d|%4d|%4d|%5d|%5d|   ", \
-		cA->content, cA->rank, cA->rank / cs, cA->cost, \
-		cA->ra, cA->rb, cA->rra, cA->rrb);
+			cA->content, cA->rank, cA->rank / cs, cA->cost, \
+			cA->ra, cA->rb, cA->rra, cA->rrb);
 		cA = cA->next;
 		sizeA--;
 	}
 	else
 	{
-		ft_printf("|%9s|%6s|%7s|%6s|%4s|%4s|%5s|%5s|   ",\
-		 "-", "-", "-", "-", "-", "-", "-", "-");
+		ft_printf("|%9s|%6s|%7s|%6s|%4s|%4s|%5s|%5s|   ", \
+			"-", "-", "-", "-", "-", "-", "-", "-");
 	}
 }
 
-void	printStackA(t_node *cA, int cs, int sizeA)
+void	print_stack_a(t_node *cA, int cs, int sizeA)
 {	
 	if (sizeB)
 	{	
@@ -74,35 +75,35 @@ void	printStackA(t_node *cA, int cs, int sizeA)
 	}
 	else
 	{
-		ft_printf("|%9s|%6s|%7s|%6s|%4s|%4s|%5s|%5s|\n",\
-		 "-", "-", "-", "-", "-", "-", "-", "-");
+		ft_printf("|%9s|%6s|%7s|%6s|%4s|%4s|%5s|%5s|\n", \
+			"-", "-", "-", "-", "-", "-", "-", "-");
 	}
 	ft_printf("+---------+------+-------+------+----+----+-----+-----+\
 	   +---------+------+-------+------+----+----+-----+-----+\n");
 }
 
-void printStacks(t_list *A, t_list *B)
+void	print_stacks(t_list *a, t_list *a)
 {
-	t_node	*cA;
-	t_node	*cB;
+	t_node	*ca;
+	t_node	*cb;
 	int		cs;
-	
-	int		sizeA;
-	int		sizeB;
-	cA = A->head;
-	cB = B->head;
-	cs = ((A->size + B->size) + CHUNK_NR - 1) / CHUNK_NR;
-	sizeA = A->size;
-	sizeB = B->size;
+	int		size_a;
+	int		size_b;
+
+	ca = a->head;
+	cb = b->head;
+	cs = ((a->size + b->size) + CHUNK_NR - 1) / CHUNK_NR;
+	size_a = a->size;
+	size_b = b->size;
 	if (cA == NULL || cB == NULL)
 	{
 		ft_printf("Error\n");
-		return;
+		return ;
 	}
-	printStacksHead();
+	print_stacks_head();
 	while (sizeB || sizeA)
 	{
-		printStackA(cA, cs, sizeA);
-		printStackB(cB, cs, sizeB);
+		print_stack_a(ca, cs, size_a);
+		print_stack_b(cb, cs, size_b);
 	}
 }

@@ -18,10 +18,10 @@ int	rotate1(t_list *list)
 	return (0);
 }
 
-int	rotate2(t_list *A, t_list *B)
+int	rotate2(t_list *a, t_list *b)
 {
-	A->head = A->head->next;
-	B->head = B->head->next;
+	a->head = a->head->next;
+	b->head = b->head->next;
 	return (0);
 }
 
@@ -31,10 +31,9 @@ int	reverse_rotate1(t_list *list)
 	return (0);
 }
 
-int	reverse_rotate2(t_list *A, t_list *B)
+int	reverse_rotate2(t_list *a, t_list *b)
 {
-	A->head = A->head->prev;
-	B->head = B->head->prev;
+	a->head = a->head->prev;
+	b->head = b->head->prev;
 	return (0);
 }
-

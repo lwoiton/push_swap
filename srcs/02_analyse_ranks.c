@@ -12,24 +12,24 @@
 
 #include "push_swap.h"
 
-void	analyseRanks(t_list *A)
+void	analyse_ranks(t_list *a)
 {
-	t_node	*curr_A;
-	int	*sorted_A;
-	int	iter;
-	
-	curr_A = A->head;
-	sorted_A = (int*)malloc(A->size * sizeof(int));
+	t_node	*curr_a;
+	int		*sorted_a;
+	int		iter;
+
+	curr_a = a->head;
+	sorted_a = (int *) malloc(a->size * sizeof(int));
 	iter = 0;
-	while(i < A->size)
+	while (iter < a->size)
 	{
-		sorted_A[iter] = curr_A->content;
-		curr_A = curr_A->next;
+		sorted_a[iter] = curr_a->content;
+		curr_a = curr_a->next;
 		iter++;
 	}
-	ft_sort_int_tab(sorted_A, A->size);
-	assignRanks(t_list *A, int *sorted_A);
-	free(sorted_A);
+	ft_sort_int_tab(sorted_a, a->size);
+	assign_ranks(a, sorted_a);
+	free(sorted_a);
 }
 
 void	ft_sort_int_tab(int *tab, int size)
@@ -56,26 +56,26 @@ void	ft_sort_int_tab(int *tab, int size)
 	}
 }
 
-void	assignRanks(t_list *A, int *sorted_A)
+void	assign_ranks(t_list *a, int *sorted_a)
 {
-	t_node	*curr_A;
-	int	iter;
-	int	rank;
-	
-	curr_A = A->head;
+	t_node	*curr_a;
+	int		iter;
+	int		rank;
+
+	curr_a = a->head;
 	iter = 0;
-	while (iter++ < A->size)
+	while (iter++ < a->size)
 	{
 		rank = 0;
-		while (rank < A->size)
+		while (rank < a->size)
 		{
-			if (sorted_A[rank] == curr_A->content)
+			if (sorted_a[rank] == curr_a->content)
 			{
-				curr_A->rank = rank;
-				break;
+				curr_a->rank = rank;
+				break ;
 			}
 			rank++;
 		}
-		curr_A = curr_A->next;
+		curr_a = curr_a->next;
 	}
 }

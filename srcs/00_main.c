@@ -1,87 +1,87 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   00_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:57:19 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/22 02:03:16 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/07/22 06:22:04 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	chunk_builder(t_list *A)
+void	chunk_builder(t_list *a)
 {
-	t_list	B;
+	t_list	b;
 	t_node	*sel_node;
-	
-	ft_list_init(&B);
-	analyseRanks(A);
-	partition(A, &B);
-	sortThree(A);
-	while (B.size > 0)
+
+	ft_list_init(&b);
+	analyse_ranks(a);
+	partition(a, &b);
+	sort_three(a);
+	while (a->size > 0)
 	{
-		calcRotations(A, &B);
-		calcCosts(A, &B);
-		sel_node = findMinCost(&B);
-		execute(A, &B, sel_node);
+		calc_rotations(a, &b);
+		calc_costs(a, &b);
+		sel_node = find_min_cost(&b);
+		execute(a, &b, sel_node);
 	}
-	while (A->head->rank != 0 || A->head->prev->rank != A->maxRank)
+	while (a->head->rank != 0 || a->head->prev->rank != a->max_rank)
 	{
-		rotate1(A);
+		rotate1(a);
 		ft_printf("ra\n");
 	}
 }
 
-t_node	*findMinCost(t_list *B)
+t_node	*find_min_cost(t_list *b)
 {
-	t_node	*curr_B;
-	t_node	*bestToMove;
-	int		minCost;
+	t_node	*curr_b;
+	t_node	*best_to_move;
+	int		min_cost;
 	int		inter;
 
-	curr_B = B->head;
-	minCost = curr_B->cost;
+	curr_b = b->head;
+	min_cost = curr_b->cost;
 	inter = 0;
-	while (inter++ < B->size)
+	while (inter++ < b->size)
 	{
-		if (curr_B->cost < minCost )
+		if (curr_b->cost < min_cost)
 		{
-			minCost = curr_B->cost;
-			bestToMove = curr_B;
+			min_cost = curr_b->cost;
+			best_to_move = curr_b;
 		}
-		curr_B = curr_B->next;
+		curr_b = curr_b->next;
 	}
-	return (bestToMove);
+	return (best_to_move);
 }
 
-int	sortThree(t_list *A)
+int	sort_three(t_list *a)
 {
-	if (A->head->content > A->head->next->content && \
-			A->head->content > A->head->next->next->content)
+	if (a->head->content > a->head->next->content && \
+			a->head->content > a->head->next->next->content)
 	{
-		rotate1(A);
+		rotate1(a);
 		ft_printf("ra\n");
 	}
-	else if (A->head->next->content > A->head->content && \
-			A->head->next->content > A->head->next->next->content)
+	else if (a->head->next->content > a->head->content && \
+			a->head->next->content > a->head->next->next->content)
 	{
-		reverse_rotate1(A);
+		reverse_rotate1(a);
 		ft_printf("rra\n");
 	}
-	if (A->head->content > A->head->next->content)
+	if (a->head->content > a->head->next->content)
 	{
-		swap(A);
+		swap(a);
 		ft_printf("sa\n");
 	}
-	A->maxRank = A->head->prev->rank;
-	A->minRank = A->head->rank;
+	a->max_rank = a->head->prev->rank;
+	a->min_rank = a->head->rank;
 	return (0);
 }
 
-int	partition(t_list *A, t_list *B)
+int	partition(t_list *a, t_list *b)
 {
 	int		chunk_size;
 	int		upper_curr_chunk;
@@ -89,41 +89,41 @@ int	partition(t_list *A, t_list *B)
 	int		upper_chunk_counter;
 	int		lower_chunk_counter;
 
-	chunk_size = (A->size + CHUNK_NR - 1) / CHUNK_NR;
+	chunk_size = (a->size + CHUNK_NR - 1) / CHUNK_NR;
 	upper_curr_chunk = 0;
 	lower_curr_chunk = 1;
 	upper_chunk_counter = 0;
 	lower_chunk_counter = 0;
-	while (A->size > 3)
+	while (a->size > 3)
 	{
-		if (A->head->rank / chunk_size == upper_curr_chunk &&\
-				A->head->rank < (A->size + B->size) - 3)
+		if (a->head->rank / chunk_size == upper_curr_chunk && \
+				a->head->rank < (a->size + b->size) - 3)
 		{
-			push(B, A);
+			push(b, a);
 			ft_printf("pb\n");
 			upper_chunk_counter++;
 		}
-		else if(A->head->rank / chunk_size == lower_curr_chunk &&\
-				A->head->rank < (A->size + B->size) - 3)
+		else if (a->head->rank / chunk_size == lower_curr_chunk && \
+				a->head->rank < (a->size + b->size) - 3)
 		{
-			push(B, A);
+			push(b, a);
 			ft_printf("pb\n");
-			if (A->head->next->rank / chunk_size > lower_curr_chunk &&\
-					A->head->next->rank >= (A->size + B->size) - 3)
+			if (a->head->next->rank / chunk_size > lower_curr_chunk\
+			&& a->head->next->rank >= (a->size + b->size) - 3)
 			{
-				rotate2(A, B);
+				rotate2(a, b);
 				ft_printf("rr\n");	
 			}
 			else
 			{
-				rotate1(B);
+				rotate1(b);
 				ft_printf("rb\n");
 			}
 			lower_chunk_counter++;
 		}
 		else
 		{
-			A->head = A->head->next;
+			a->head = a->head->next;
 			ft_printf("ra\n");
 		}
 		if (upper_chunk_counter == chunk_size)
@@ -142,10 +142,11 @@ int	partition(t_list *A, t_list *B)
 
 int main(int argc, char *argv[])
 {
-	t_list	*A;
-	
-	A = parseInput(argc, argv);
-	//analyseRanks(t_list *A);
-	chunk_builder(A);
+	t_list	a;
+
+	ft_list_init(&a);
+	parse_input(argc, argv, &a);
+	//analyseRanks(t_list *a);
+	chunk_builder(&a);
     	return (0);
 }

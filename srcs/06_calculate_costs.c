@@ -12,53 +12,53 @@
 
 #include "push_swap.h"
 
-int	calcCosts(t_list *A, t_list *B)
+int	calc_osts(t_list *a, t_list *b)
 {
-	t_node	*curr_B;
+	t_node	*curr_b;
 	int		iter;
 
-	curr_B = B->head;
+	curr_b = b->head;
 	iter = 0;
-	while (iter++ < B->size)
+	while (iter++ < b->size)
 	{
-		if (curr_B->ra > 0 && curr_B->rb > 0)
-			curr_B->cost = max(curr_B->ra, curr_B->rb);
-		else if (curr_B->rra > 0 && curr_B->rrb > 0)
-			curr_B->cost = max(curr_B->rra, curr_B->rrb);	
+		if (curr_b->ra > 0 && curr_b->rb > 0)
+			curr_b->cost = max(curr_b->ra, curr_b->rb);
+		else if (curr_b->rra > 0 && curr_b->rrb > 0)
+			curr_b->cost = max(curr_b->rra, curr_b->rrb);
 		else
-			curr_B->cost = curr_B->ra + curr_B->rb + curr_B->rrb + curr_B->rra;
-		accountChunkCost(A, B, curr_B);
-		//accountAdjacency(A, curr_B);
-		curr_B = curr_B->next;
+			curr_b->cost = curr_b->ra + curr_b->rb + curr_b->rrb + curr_b->rra;
+		account_chunk_cost(a, b, curr_b);
+//		account_adjacency(a, curr_b);
+		curr_b = curr_b->next;
 	}
 	return (0);
 }
 
-int	accountAdjacency(t_list *A, t_node *curr_B)
+int	account_adjacency(t_list *a, t_node *curr_b)
 {
-	t_node	*curr_A;
+	t_node	*curr_a;
 	int		steps;
 	int		diff;
 
-	curr_A = A->head;
-	if (curr_B->ra)
-		steps = curr_B->ra;
+	curr_a = a->head;
+	if (curr_b->ra)
+		steps = curr_b->ra;
 	else
-		steps = curr_B->rra;
+		steps = curr_b->rra;
 	while (steps-- > 0)
-		curr_A = curr_A->next;
-	diff = curr_A->rank - curr_B->rank;
-	curr_B->cost += diff;
+		curr_a = curr_a->next;
+	diff = curr_a->rank - curr_b->rank;
+	curr_b->cost += diff;
 	return (0);
 }
 
-int	accountChunkCost(t_list *A, t_list *B, t_node *curr_B)
+int	account_chunk_cost(t_list *a, t_list *b, t_node *curr_b)
 {
 	int	chunk_size;
 
-	chunk_size = ((A->size + B->size) + CHUNK_NR - 1) / CHUNK_NR;
-	if (curr_B->rank / chunk_size != A->head->rank / chunk_size)
-		curr_B->cost += NOT_IN_CHUNK_PANELTY;
+	chunk_size = ((a->size + b->size) + CHUNK_NR - 1) / CHUNK_NR;
+	if (curr_b->rank / chunk_size != a->head->rank / chunk_size)
+		curr_b->cost += NOT_IN_CHUNK_PANELTY;
 	return (0);
 }
 

@@ -12,57 +12,57 @@
 
 #include "push_swap.h"
 
-int	getMinRank(t_list *A)
+int	get_min_rank(t_list *a)
 {
-	t_node	*curr_A;
-	int		minRank;
+	t_node	*curr_a;
+	int		min_rank;
 	int		iter;
 
-	curr_A = A->head;
-	minRank = curr_A->rank;
+	curr_a = a->head;
+	min_rank = curr_a->rank;
 	iter = 0;
-	while (iter++ < A->size)
+	while (iter++ < a->size)
 	{
-		if(curr_A->rank < minRank)
-			minRank = curr_A->rank;
-		curr_A = curr_A->next;
+		if (curr_a->rank < min_rank)
+			min_rank = curr_a->rank;
+		curr_a = curr_a->next;
 	}
-	return (minRank);
+	return (min_rank);
 }
 
-int	getMaxRank(t_list *A)
+int	get_max_rank(t_list *a)
 {
-	t_node	*curr_A;
-	int		maxRank;
+	t_node	*curr_a;
+	int		max_rank;
 	int		iter;
-	
-	curr_A = A->head;
-	maxRank = -1;
+
+	curr_a = a->head;
+	max_rank = -1;
 	iter = 0;
-	while (iter++ < A->size)
+	while (iter++ < a->size)
 	{
-		if (curr_A->rank > maxRank)
-			maxRank = curr_A->rank;
-		curr_A = curr_A->next;
+		if (curr_a->rank > max_rank)
+			max_rank = curr_a->rank;
+		curr_a = curr_a->next;
 	}
-	return (maxRank);
+	return (max_rank);
 }
 
-int	getNextRank(t_list *A, int currRank_BN)
+int	get_next_rank(t_list *a, int curr_rank_bn)
 {
-	t_node	*curr_A;
-	int		nextRank;
+	t_node	*curr_a;
+	int		next_rank;
 	int		iter;
 
-	curr_A = A->head;
-	nextRank = A->maxRank;
+	curr_a = a->head;
+	next_rank = a->max_rank;
 	iter = 0;
-	while (iter < A->size)
+	while (iter < a->size)
 	{
-		if (curr_A->rank > currRank_BN && curr_A->rank < nextRank)
-			nextRank = curr_A->rank;
-		curr_A = curr_A->next;
+		if (curr_a->rank > curr_rank_bn && curr_a->rank < next_rank)
+			next_rank = curr_a->rank;
+		curr_a = curr_a->next;
 		iter++;
 	}
-	return (nextRank);
+	return (next_rank);
 }

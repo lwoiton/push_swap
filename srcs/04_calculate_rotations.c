@@ -1,96 +1,96 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotation_calculation.c                             :+:      :+:    :+:   */
+/*   04_calculate_rotations.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 03:17:26 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/22 03:17:51 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/07/22 06:24:46 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	calcRotations(t_list *A, t_list *B)
+int	calc_rotations(t_list *a, t_list *b)
 {
-	t_node	*curr_B;
-	int		nextRank;
+	t_node	*curr_b;
+	int		next_rank;
 	int		rotations;
 
-	curr_B = B->head;
+	curr_b = b->head;
 	rotations = 0;
-	resetRotations(B);
-	while (rotations < B->size)
+	reset_rotations(b);
+	while (rotations < b->size)
 	{
-		curr_B->rb = rotations;
-		curr_B = curr_B->next;
-		if (curr_B->rank < A->minRank)
-			curr_B->ra = getRotations_A(A, A->minRank);
+		curr_b->rb = rotations;
+		curr_b = curr_b->next;
+		if (curr_b->rank < a->min_rank)
+			curr_b->ra = get_rotations_a(a, b->min_rank);
 		else
 		{
-			nextRank = getNextRank(A, curr_B->rank);
-			curr_B->ra = getRotations_A(A, nextRank);
+			next_rank = get_next_rank(a, curr_b->rank);
+			curr_b->ra = get_rotations_a(a, next_rank);
 		}
 		rotations++;
 	}
-	setRotationDirection(A, B);
+	set_rotation_direction(a, b);
 	return (0);
 }
 
-int	getRotations_A(t_list *A, int nextRank)
+int	get_rotations_a(t_list *a, int next_rank)
 {
 	int		rotations;
-	t_node	*curr_A;
+	t_node	*curr_a;
 
 	rotations = 0;
-	curr_A = A->head;
-	while (curr_A->rank != nextRank)
+	curr_a = a->head;
+	while (curr_a->rank != next_rank)
 	{
-		curr_A = curr_A->next;
+		curr_a = curr_a->next;
 		rotations++;
 	}
 	return (rotations);
 }
 
-int	resetRotations(t_list *B)
+int	reset_rotations(t_list *b)
 {
-	t_node	*curr_B;
+	t_node	*curr_b;
 	int		iter;
 
-	curr_B = B->head;
+	curr_b = b->head;
 	iter = 0;
-	while (iter++ < B->size)
+	while (iter++ < b->size)
 	{
-		curr_B->rb = 0;
-		curr_B->rrb = 0;
-		curr_B->ra = 0;
-		curr_B->rra = 0;
-		curr_B = curr_B->next;
+		curr_b->rb = 0;
+		curr_b->rrb = 0;
+		curr_b->ra = 0;
+		curr_b->rra = 0;
+		curr_b = curr_b->next;
 	}
 	return (0);
 }
 
-int	setRotationDirection(t_list *A, t_list *B)
+int	set_rotation_direction(t_list *a, t_list *b)
 {
-	t_node	*curr_B;
+	t_node	*curr_b;
 	int		iter;
 
-	curr_B = B->head;
+	curr_b = b->head;
 	iter = 0;
-	while (iter++ < B->size)
+	while (iter++ < b->size)
 	{
-		if (curr_B->rb > B->size / 2)
+		if (curr_b->rb > b->size / 2)
 		{
-			curr_B->rrb = B->size - curr_B->rb;
-			curr_B->rb = 0;
+			curr_b->rrb = b->size - curr_b->rb;
+			curr_b->rb = 0;
 		}
-		if (curr_B->ra > A->size / 2)
+		if (curr_b->ra > a->size / 2)
 		{
-			curr_B->rra = A->size - curr_B->ra;
-			curr_B->ra = 0;
+			curr_b->rra = a->size - curr_b->ra;
+			curr_b->ra = 0;
 		}
-		curr_B = curr_B->next;
+		curr_b = curr_b->next;
 	}
 	return (0);
 }
