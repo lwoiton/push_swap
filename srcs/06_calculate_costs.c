@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	calc_osts(t_list *a, t_list *b)
+int	calc_costs(t_list *a, t_list *b)
 {
 	t_node	*curr_b;
 	int		iter;

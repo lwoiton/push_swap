@@ -36,7 +36,8 @@ SRC_FILES = 00_main.c \
             04_calculate_rotations.c \
             05_read_ranks.c \
             06_calculate_costs.c \
-            07_execute_sort.c
+            07_execute_sort.c \
+            utils_display_linked_list.c
 
 # Object files
 OBJ_FILES = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC_FILES))

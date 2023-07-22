@@ -46,15 +46,15 @@ void	print_stacks_head(void)
 	   +---------+------+-------+------+----+----+-----+-----+\n");
 }
 
-void	print_stack_a(t_node *cA, int cs, int sizeA)
+void	print_stack_a(t_node *ca, int cs, int size_a)
 {
-	if (sizeA)
+	if (size_a)
 	{
 		ft_printf("|%9d|%6d|%7d|%6d|%4d|%4d|%5d|%5d|   ", \
-			cA->content, cA->rank, cA->rank / cs, cA->cost, \
-			cA->ra, cA->rb, cA->rra, cA->rrb);
-		cA = cA->next;
-		sizeA--;
+			ca->content, ca->rank, ca->rank / cs, ca->cost, \
+			ca->ra, ca->rb, ca->rra, ca->rrb);
+		ca = ca->next;
+		size_a--;
 	}
 	else
 	{
@@ -63,15 +63,15 @@ void	print_stack_a(t_node *cA, int cs, int sizeA)
 	}
 }
 
-void	print_stack_a(t_node *cA, int cs, int sizeA)
+void	print_stack_b(t_node *cb, int cs, int size_b)
 {	
-	if (sizeB)
+	if (size_b)
 	{	
 		ft_printf("|%9d|%6d|%7d|%6d|%4d|%4d|%5d|%5d|\n", \
-		cB->content, cB->rank, cB->rank / cs, cB->cost, \
-		cB->ra, cB->rb, cB->rra, cB->rrb);
-		cB = cB->next;
-		sizeB--;
+		cb->content, cb->rank, cb->rank / cs, cb->cost, \
+		cb->ra, cb->rb, cb->rra, cb->rrb);
+		cb = cb->next;
+		size_b--;
 	}
 	else
 	{
@@ -82,7 +82,7 @@ void	print_stack_a(t_node *cA, int cs, int sizeA)
 	   +---------+------+-------+------+----+----+-----+-----+\n");
 }
 
-void	print_stacks(t_list *a, t_list *a)
+void	print_stacks(t_list *a, t_list *b)
 {
 	t_node	*ca;
 	t_node	*cb;
@@ -95,13 +95,13 @@ void	print_stacks(t_list *a, t_list *a)
 	cs = ((a->size + b->size) + CHUNK_NR - 1) / CHUNK_NR;
 	size_a = a->size;
 	size_b = b->size;
-	if (cA == NULL || cB == NULL)
+	if (ca == NULL || cb == NULL)
 	{
 		ft_printf("Error\n");
 		return ;
 	}
 	print_stacks_head();
-	while (sizeB || sizeA)
+	while (size_b || size_a)
 	{
 		print_stack_a(ca, cs, size_a);
 		print_stack_b(cb, cs, size_b);
