@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_rotate.c                                        :+:      :+:    :+:   */
+/*   rotate_operations.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/12 17:23:13 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/13 14:41:45 by lwoiton          ###   ########.fr       */
+/*   Created: 2023/07/22 03:09:25 by lwoiton           #+#    #+#             */
+/*   Updated: 2023/07/22 03:09:45 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	rotate_single(t_list *list)
+#include "push_swap.h"
+
+int	rotate1(t_list *list)
 {
 	list->head = list->head->next;
 	return (0);
 }
 
-int rotate_both(t_list *list_a, t_list *list_b)
+int	rotate2(t_list *A, t_list *B)
 {
-	list_a->head = list_a->head->next;
-	list_b->head = node_b->head->next;
+	A->head = A->head->next;
+	B->head = B->head->next;
 	return (0);
 }
 
-int	reverse_rotate_single(t_list *list)
+int	reverse_rotate1(t_list *list)
 {
 	list->head = list->head->prev;
 	return (0);
 }
 
-int reverse_rotate_both(t_list *list_a, t_list *list_b)
+int	reverse_rotate2(t_list *A, t_list *B)
 {
-	list_a->head = list_a->head->prev;
-	list_b->head = list_b->head->prev;
+	A->head = A->head->prev;
+	B->head = B->head->prev;
 	return (0);
 }
-
 

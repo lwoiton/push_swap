@@ -27,9 +27,16 @@ INC_DIR = incl
 LIB_DIR = libft
 
 # Source files
-SRC_FILES = main.c \
-            ft_sort_int_tab.c\
-            #linked_list_utils.c \
+SRC_FILES = 00_main.c \
+            00_linked_list_utils.c \
+            00_rotate_operations.c \
+            00_stack_operations.c \
+            01_parse_input.c \
+            02_analyse_ranks.c \
+            04_calculate_rotations.c \
+            05_read_ranks.c \
+            06_calculate_costs.c \
+            07 execute_sort.c
 
 # Object files
 OBJ_FILES = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
