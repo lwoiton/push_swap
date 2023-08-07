@@ -19,7 +19,6 @@ CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -g
 IFLAGS = -I$(INC_DIR) -I$(LIB_DIR)/$(INC_DIR)
 
-
 # Directories
 SRC_DIR = srcs
 OBJ_DIR = objs

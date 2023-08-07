@@ -26,7 +26,7 @@ int	calc_rotations(t_list *a, t_list *b)
 		curr_b->rb = rotations;
 		curr_b = curr_b->next;
 		if (curr_b->rank < a->min_rank)
-			curr_b->ra = get_rotations_a(a, b->min_rank);
+			curr_b->ra = get_rotations_a(a, a->min_rank);
 		else
 		{
 			next_rank = get_next_rank(a, curr_b->rank);

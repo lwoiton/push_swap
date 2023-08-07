@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   analyse_ranks.c                                    :+:      :+:    :+:   */
+/*   02_analyse_ranks.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 03:42:45 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/22 03:43:06 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/07 12:24:17 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ void	analyse_ranks(t_list *a)
 }
 
 void	ft_sort_int_tab(int *tab, int size)
-{	
+{
 	int	i;
 	int	cur;
 	int	buff;
 
 	i = 0;
 	while (i < size - 1)
-	{	
+	{
 		cur = i + 1;
 		while (cur < size)
 		{

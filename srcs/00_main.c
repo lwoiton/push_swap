@@ -6,7 +6,7 @@
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:57:19 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/22 06:22:04 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/07 12:53:23 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 void	chunk_builder(t_list *a)
 {
 	t_list	b;
-	t_node	*sel_node;
+//	t_node	*sel_node;
 
 	ft_list_init(&b);
-	analyse_ranks(a);
+//	analyse_ranks(a);
+	print_stacks(a, &b);
 	partition(a, &b);
 	sort_three(a);
-	while (a->size > 0)
+/*
+	while (b.size > 0)
 	{
 		calc_rotations(a, &b);
 		calc_costs(a, &b);
@@ -33,6 +35,7 @@ void	chunk_builder(t_list *a)
 		rotate1(a);
 		ft_printf("ra\n");
 	}
+*/
 }
 
 t_node	*find_min_cost(t_list *b)
@@ -81,7 +84,7 @@ int	sort_three(t_list *a)
 	return (0);
 }
 
-int	partition(t_list *a, t_list *b)
+void	partition(t_list *a, t_list *b)
 {
 	int		chunk_size;
 	int		upper_curr_chunk;
@@ -108,11 +111,11 @@ int	partition(t_list *a, t_list *b)
 		{
 			push(b, a);
 			ft_printf("pb\n");
-			if (a->head->next->rank / chunk_size > lower_curr_chunk\
-			&& a->head->next->rank >= (a->size + b->size) - 3)
+			if (a->head->next->rank / chunk_size > lower_curr_chunk && \
+					a->head->next->rank >= (a->size + b->size) - 3)
 			{
 				rotate2(a, b);
-				ft_printf("rr\n");	
+				ft_printf("rr\n");
 			}
 			else
 			{
@@ -136,17 +139,17 @@ int	partition(t_list *a, t_list *b)
 			lower_chunk_counter = 0;
 			lower_curr_chunk += 2;
 		}
+		print_stacks(a, b);
 	}
-	return (0);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_list	a;
 
 	ft_list_init(&a);
 	parse_input(argc, argv, &a);
-	//analyseRanks(t_list *a);
+	analyse_ranks(&a);
 	chunk_builder(&a);
-    	return (0);
+	return (0);
 }

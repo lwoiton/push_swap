@@ -6,11 +6,11 @@
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 19:01:25 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/22 06:22:51 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/07 12:23:48 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"push_swap.h"
+#include "push_swap.h"
 
 void	ft_list_init(t_list *list)
 {
@@ -40,7 +40,7 @@ t_node	*ft_lstnew(int content)
 }
 
 int	ft_lstadd_back(t_list *list, t_node *node)
-{	
+{
 	t_node	*temp;
 
 	list->size += 1;
@@ -51,10 +51,10 @@ int	ft_lstadd_back(t_list *list, t_node *node)
 		node->prev = node;
 	}
 	else
-	{	
+	{
 		temp = list->head;
 		while (temp->next != list->head)
-		{	
+		{
 			temp = temp->next;
 		}
 		node->next = list->head;

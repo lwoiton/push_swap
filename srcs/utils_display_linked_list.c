@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_linked_list.c                              :+:      :+:    :+:   */
+/*   utils_display_linked_list.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 02:57:38 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/22 02:57:40 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/07 12:29:18 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,30 +48,26 @@ void	print_stacks_head(void)
 
 void	print_stack_a(t_node *ca, int cs, int size_a)
 {
-	if (size_a)
+	if (size_a > 0)
 	{
-		ft_printf("|%9d|%6d|%7d|%6d|%4d|%4d|%5d|%5d|   ", \
+		ft_printf("|%9d|%6d|%7d|%6d|%4d|%4d|%5d|%5d|    ", \
 			ca->content, ca->rank, ca->rank / cs, ca->cost, \
 			ca->ra, ca->rb, ca->rra, ca->rrb);
-		ca = ca->next;
-		size_a--;
 	}
 	else
 	{
-		ft_printf("|%9s|%6s|%7s|%6s|%4s|%4s|%5s|%5s|   ", \
+		ft_printf("|%9s|%6s|%7s|%6s|%4s|%4s|%5s|%5s|    ", \
 			"-", "-", "-", "-", "-", "-", "-", "-");
 	}
 }
 
 void	print_stack_b(t_node *cb, int cs, int size_b)
-{	
-	if (size_b)
-	{	
+{
+	if (size_b > 0)
+	{
 		ft_printf("|%9d|%6d|%7d|%6d|%4d|%4d|%5d|%5d|\n", \
-		cb->content, cb->rank, cb->rank / cs, cb->cost, \
-		cb->ra, cb->rb, cb->rra, cb->rrb);
-		cb = cb->next;
-		size_b--;
+			cb->content, cb->rank, cb->rank / cs, cb->cost, \
+			cb->ra, cb->rb, cb->rra, cb->rrb);
 	}
 	else
 	{
@@ -84,26 +80,26 @@ void	print_stack_b(t_node *cb, int cs, int size_b)
 
 void	print_stacks(t_list *a, t_list *b)
 {
-	t_node	*ca;
-	t_node	*cb;
 	int		cs;
 	int		size_a;
 	int		size_b;
 
-	ca = a->head;
-	cb = b->head;
 	cs = ((a->size + b->size) + CHUNK_NR - 1) / CHUNK_NR;
 	size_a = a->size;
 	size_b = b->size;
-	if (ca == NULL || cb == NULL)
+	if (a->head == NULL && b->head == NULL)
 	{
 		ft_printf("Error\n");
-		return ;
+		return;
 	}
 	print_stacks_head();
-	while (size_b || size_a)
+	while (size_b > 0 || size_a > 0)
 	{
-		print_stack_a(ca, cs, size_a);
-		print_stack_b(cb, cs, size_b);
+		print_stack_a(a->head, cs, size_a--);
+		if (a->head)
+			a->head = a->head->next;
+		print_stack_b(b->head, cs, size_b--);
+		if (b->head)
+			b->head = b->head->next;
 	}
 }
