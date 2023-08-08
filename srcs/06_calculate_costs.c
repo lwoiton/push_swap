@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   06_calculate_costs.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 03:15:17 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/22 03:15:34 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/08 18:25:32 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	calc_costs(t_list *a, t_list *b)
 		else
 			curr_b->cost = curr_b->ra + curr_b->rb + curr_b->rrb + curr_b->rra;
 		account_chunk_cost(a, b, curr_b);
-//		account_adjacency(a, curr_b);
+		account_adjacency(a, curr_b);
 		curr_b = curr_b->next;
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_display_linked_list.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 02:57:38 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/07 12:29:18 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/08 18:30:33 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	print_stacks(t_list *a, t_list *b)
 	if (a->head == NULL && b->head == NULL)
 	{
 		ft_printf("Error\n");
-		return;
+		return ;
 	}
 	print_stacks_head();
 	while (size_b > 0 || size_a > 0)

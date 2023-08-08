@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:57:19 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/07 12:53:23 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/08 18:30:06 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@ void	chunk_builder(t_list *a)
 	t_node	*sel_node;
 
 	ft_list_init(&b);
-//	analyse_ranks(a);
-//	print_stacks(a, &b);
 	partition(a, &b);
 	sort_three(a);
-
 	while (b.size > 0)
 	{
 		calc_rotations(a, &b);
@@ -30,11 +27,24 @@ void	chunk_builder(t_list *a)
 		sel_node = find_min_cost(&b);
 		execute(a, &b, sel_node);
 	}
+}
+
+int	final_rotation(t_list *a)
+{
 	while (a->head->rank != 0 || a->head->prev->rank != a->max_rank)
 	{
-		rotate1(a);
-		ft_printf("ra\n");
+		if (a->head->rank > a->max_rank / 2)
+		{
+			rotate1(a);
+			ft_printf("ra\n");
+		}
+		else
+		{
+			reverse_rotate1(a);
+			ft_printf("rra\n");
+		}
 	}
+	return (0);
 }
 
 t_node	*find_min_cost(t_list *b)
@@ -83,64 +93,6 @@ int	sort_three(t_list *a)
 	return (0);
 }
 
-void	partition(t_list *a, t_list *b)
-{
-	int		chunk_size;
-	int		upper_curr_chunk;
-	int		lower_curr_chunk;
-	int		upper_chunk_counter;
-	int		lower_chunk_counter;
-
-	chunk_size = (a->size + CHUNK_NR - 1) / CHUNK_NR;
-	upper_curr_chunk = 0;
-	lower_curr_chunk = 1;
-	upper_chunk_counter = 0;
-	lower_chunk_counter = 0;
-	while (a->size > 3)
-	{
-		if (a->head->rank / chunk_size == upper_curr_chunk && \
-				a->head->rank < (a->size + b->size) - 3)
-		{
-			push(b, a);
-			ft_printf("pb\n");
-			upper_chunk_counter++;
-		}
-		else if (a->head->rank / chunk_size == lower_curr_chunk && \
-				a->head->rank < (a->size + b->size) - 3)
-		{
-			push(b, a);
-			ft_printf("pb\n");
-			if (a->head->next->rank / chunk_size > lower_curr_chunk && \
-					a->head->next->rank >= (a->size + b->size) - 3)
-			{
-				rotate2(a, b);
-				ft_printf("rr\n");
-			}
-			else
-			{
-				rotate1(b);
-				ft_printf("rb\n");
-			}
-			lower_chunk_counter++;
-		}
-		else
-		{
-			a->head = a->head->next;
-			ft_printf("ra\n");
-		}
-		if (upper_chunk_counter == chunk_size)
-		{
-			upper_chunk_counter = 0;
-			upper_curr_chunk += 2;
-		}
-		else if (lower_chunk_counter == chunk_size)
-		{
-			lower_chunk_counter = 0;
-			lower_curr_chunk += 2;
-		}
-	}
-}
-
 int	main(int argc, char *argv[])
 {
 	t_list	a;
@@ -149,5 +101,6 @@ int	main(int argc, char *argv[])
 	parse_input(argc, argv, &a);
 	analyse_ranks(&a);
 	chunk_builder(&a);
+	final_rotation(&a);
 	return (0);
 }

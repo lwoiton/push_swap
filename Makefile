@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/11 17:15:14 by lwoiton           #+#    #+#              #
-#    Updated: 2023/07/18 14:16:16 by lwoiton          ###   ########.fr        #
+#    Updated: 2023/08/08 17:25:24 by lwoiton          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC_FILES = 00_main.c \
             00_stack_operations.c \
             01_parse_input.c \
             02_analyse_ranks.c \
+            03_pre_sort.c\
             04_calculate_rotations.c \
             05_read_ranks.c \
             06_calculate_costs.c \

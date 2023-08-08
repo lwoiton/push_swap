@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 19:05:04 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/07 12:27:16 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/08 18:29:22 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "ft_printf.h"
 
 # define CHUNK_NR 5
-# define NOT_IN_CHUNK_PANELTY 20
+# define NOT_IN_CHUNK_PANELTY 8
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
 
@@ -32,6 +32,7 @@ typedef struct s_node
 	int				rb;
 	int				rra;
 	int				rrb;
+
 	struct s_node	*next;
 	struct s_node	*prev;
 }	t_node;
@@ -43,6 +44,14 @@ typedef struct s_list
 	int		min_rank;
 	int		max_rank;
 }	t_list;
+
+typedef struct s_chnkr
+{
+	int		up_crr_chnk;
+	int		lo_crr_chnk;
+	int		up_chnk_cntr;
+	int		lo_chnk_cntr;
+}   t_chnkr;
 
 //-------------------------00_linked_list.c---------------------------//
 void	ft_list_init(t_list *list);
@@ -63,7 +72,7 @@ int		push(t_list *dst, t_list *src);
 void	chunk_builder(t_list *a);
 t_node	*find_min_cost(t_list *b);
 int		sort_three(t_list *a);
-void	partition(t_list *a, t_list *b);
+int		final_rotation(t_list *a);
 
 //----------------------------01_parse_input.c-------------------------------//
 int		parse_input(int argc, char *argv[], t_list *a);
@@ -77,6 +86,11 @@ void	assign_ranks(t_list *a, int *sorted_a);
 void	ft_sort_int_tab(int *sorted_a, int size);
 
 //-----------------------------03_pre_sort.c---------------------------------//
+int		init_chunker(t_chnkr *cc);
+void	partition(t_list *a, t_list *b);
+int		push_b(t_list *a, t_list *b, t_chnkr *cc);
+int		push_to_low_and_rotate(t_list *a, t_list *b, t_chnkr *cc, int chunk_size);
+int		increase_current_chunks(t_chnkr *cc, int chunk_size);
 
 //------------------------04_calculate_rotations.c---------------------------//
 int		calc_rotations(t_list *a, t_list *b);
