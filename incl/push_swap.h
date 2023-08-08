@@ -18,7 +18,7 @@
 # include "libft.h"
 # include "ft_printf.h"
 
-# define CHUNK_NR 3
+# define CHUNK_NR 5
 # define NOT_IN_CHUNK_PANELTY 20
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648

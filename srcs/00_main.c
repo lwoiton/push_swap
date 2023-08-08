@@ -15,14 +15,14 @@
 void	chunk_builder(t_list *a)
 {
 	t_list	b;
-//	t_node	*sel_node;
+	t_node	*sel_node;
 
 	ft_list_init(&b);
 //	analyse_ranks(a);
-	print_stacks(a, &b);
+//	print_stacks(a, &b);
 	partition(a, &b);
 	sort_three(a);
-/*
+
 	while (b.size > 0)
 	{
 		calc_rotations(a, &b);
@@ -35,7 +35,6 @@ void	chunk_builder(t_list *a)
 		rotate1(a);
 		ft_printf("ra\n");
 	}
-*/
 }
 
 t_node	*find_min_cost(t_list *b)
@@ -139,7 +138,6 @@ void	partition(t_list *a, t_list *b)
 			lower_chunk_counter = 0;
 			lower_curr_chunk += 2;
 		}
-		print_stacks(a, b);
 	}
 }
 
