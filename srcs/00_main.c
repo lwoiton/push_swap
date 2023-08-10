@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:57:19 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/10 14:28:16 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/10 16:56:22 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	final_rotation(t_list *a)
 {
 	while (a->head->rank != 0 || a->head->prev->rank != a->max_rank)
 	{
-		if (a->head->rank > a->max_rank / 2)
+		if (a->head->rank >= a->max_rank / 2)
 		{
 			rotate1(a);
 			ft_printf("ra\n");
@@ -101,6 +101,7 @@ int	main(int argc, char *argv[])
 	parse_input(argc, argv, &a);
 	analyse_ranks(&a);
 	chunk_builder(&a);
-	final_rotation(&a);
+//	final_rotation(&a);
+	free_list(&a);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 19:01:25 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/10 14:27:00 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/10 16:41:13 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,21 @@ int	ft_lstadd_back(t_list *list, t_node *node)
 		node->prev = temp;
 		temp->next = node;
 	}
+	return (0);
+}
+
+int	free_list(t_list *list)
+{
+	t_node *tmp;
+
+	while (list->head != list->head->next)
+	{
+		tmp = list->head;
+		list->head->prev->next = list->head->next;
+		list->head->next->prev = list->head->prev;
+		list->head = list->head->next;
+		free(tmp);
+	}
+	free(list->head);
 	return (0);
 }

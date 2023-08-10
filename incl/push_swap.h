@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 19:05:04 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/10 14:30:02 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/10 15:55:09 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	ft_list_init(t_list *list);
 t_node	*ft_lstnew(int content);
 int		ft_lstadd_back(t_list *list, t_node *node);
 int		determine_chunknr(t_list *a);
+int		free_list(t_list *list);
 
 //-------------------------00_rotate_operations.c---------------------------//
 int		rotate1(t_list *list);
@@ -80,6 +81,7 @@ int		final_rotation(t_list *a);
 int		parse_input(int argc, char *argv[], t_list *a);
 int		parse_string(char *argv[], t_list *a);
 int		parse_args(int argc, char *argv[], t_list *a);
+int		check_input(char *str);
 
 //---------------------------02_analyse_ranks.c------------------------------//
 void	analyse_ranks(t_list *a);
