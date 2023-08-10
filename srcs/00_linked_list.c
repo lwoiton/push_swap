@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   00_linked_list.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 19:01:25 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/07 12:23:48 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/10 14:27:00 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,29 @@
 void	ft_list_init(t_list *list)
 {
 	list->size = 0;
+	list->chunk_nr = 0;
+	list->chunk_size = 0;
 	list->min_rank = INT_MAX;
 	list->max_rank = INT_MIN;
 	list->head = NULL;
+}
+
+int	determine_chunknr(t_list *a)
+{
+	if (a->size > 5 && a->size <= 20)
+		a->chunk_nr = 2; 
+	else if (a->size > 20 && a->size <= 50)
+		a->chunk_nr = 3;
+	else if (a->size > 50 && a->size <= 100)
+		a->chunk_nr = 4;
+	else if (a->size > 100 && a->size <= 200)
+		a->chunk_nr = 5;
+	else if (a->size > 200 && a->size <= 400)
+		a->chunk_nr = 7;
+	else if (a->size > 400)
+		a->chunk_nr = 8;
+	a->chunk_size = (a->size + a->chunk_nr - 1) / a->chunk_nr;
+	return (0);
 }
 
 t_node	*ft_lstnew(int content)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   01_parse_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 02:49:27 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/22 06:23:35 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/10 14:28:29 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	parse_input(int argc, char *argv[], t_list *a)
 	else
 	{
 	}
+	determine_chunknr(a);
 	return (0);
 }
 

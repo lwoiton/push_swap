@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 02:57:38 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/08 18:30:33 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/10 14:22:38 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void	display_list(t_list *list)
 {
 	t_node	*curr_n;
-	int		chunk_size;
 
 	curr_n = list->head;
-	chunk_size = (list->size + CHUNK_NR - 1) / CHUNK_NR;
 	if (curr_n == NULL)
 	{
 		ft_printf("List is empty.\n");
@@ -28,11 +26,11 @@ void	display_list(t_list *list)
 	while (curr_n->next != list->head)
 	{
 		ft_printf("%d(%d,%d) ", curr_n->content, \
-			curr_n->rank, curr_n->rank / chunk_size);
+			curr_n->rank, curr_n->rank / list->chunk_size);
 		curr_n = curr_n->next;
 	}
 	ft_printf("%d(%d,%d)\n", curr_n->content, \
-		curr_n->rank, curr_n->rank / chunk_size);
+		curr_n->rank, curr_n->rank / list->chunk_size);
 	ft_printf("\nSize: %d\n", list->size);
 }
 
@@ -63,11 +61,9 @@ void	print_stack(t_node *node, int cs, int size_a)
 
 void	print_stacks(t_list *a, t_list *b)
 {
-	int		cs;
 	int		size_a;
 	int		size_b;
 
-	cs = ((a->size + b->size) + CHUNK_NR - 1) / CHUNK_NR;
 	size_a = a->size;
 	size_b = b->size;
 	if (a->head == NULL && b->head == NULL)
@@ -78,10 +74,10 @@ void	print_stacks(t_list *a, t_list *b)
 	print_stacks_head();
 	while (size_b > 0 || size_a > 0)
 	{
-		print_stack(a->head, cs, size_a);
+		print_stack(a->head, a->chunk_size, size_a);
 		if (a->head && size_a-- > 0)
 			a->head = a->head->next;
-		print_stack(b->head, cs, size_b);
+		print_stack(b->head, a->chunk_size, size_b);
 		if (b->head && size_b-- > 0)
 			b->head = b->head->next;
 		ft_printf("\n");

@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 03:15:17 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/08 18:25:32 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/10 14:23:34 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	calc_costs(t_list *a, t_list *b)
 			curr_b->cost = max(curr_b->rra, curr_b->rrb);
 		else
 			curr_b->cost = curr_b->ra + curr_b->rb + curr_b->rrb + curr_b->rra;
-		account_chunk_cost(a, b, curr_b);
+		account_chunk_cost(a, curr_b);
 		account_adjacency(a, curr_b);
 		curr_b = curr_b->next;
 	}
@@ -52,12 +52,9 @@ int	account_adjacency(t_list *a, t_node *curr_b)
 	return (0);
 }
 
-int	account_chunk_cost(t_list *a, t_list *b, t_node *curr_b)
+int	account_chunk_cost(t_list *a, t_node *curr_b)
 {
-	int	chunk_size;
-
-	chunk_size = ((a->size + b->size) + CHUNK_NR - 1) / CHUNK_NR;
-	if (curr_b->rank / chunk_size != a->head->rank / chunk_size)
+	if (curr_b->rank / a->chunk_size != a->head->rank / a->chunk_size)
 		curr_b->cost += NOT_IN_CHUNK_PANELTY;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 19:05:04 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/08 18:29:22 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/10 14:30:02 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include "libft.h"
 # include "ft_printf.h"
 
-# define CHUNK_NR 5
 # define NOT_IN_CHUNK_PANELTY 8
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
@@ -41,6 +40,8 @@ typedef struct s_list
 {
 	t_node	*head;
 	int		size;
+	int		chunk_nr;
+	int		chunk_size;
 	int		min_rank;
 	int		max_rank;
 }	t_list;
@@ -51,12 +52,13 @@ typedef struct s_chnkr
 	int		lo_crr_chnk;
 	int		up_chnk_cntr;
 	int		lo_chnk_cntr;
-}   t_chnkr;
+}	t_chnkr;
 
 //-------------------------00_linked_list.c---------------------------//
 void	ft_list_init(t_list *list);
 t_node	*ft_lstnew(int content);
 int		ft_lstadd_back(t_list *list, t_node *node);
+int		determine_chunknr(t_list *a);
 
 //-------------------------00_rotate_operations.c---------------------------//
 int		rotate1(t_list *list);
@@ -89,8 +91,8 @@ void	ft_sort_int_tab(int *sorted_a, int size);
 int		init_chunker(t_chnkr *cc);
 void	partition(t_list *a, t_list *b);
 int		push_b(t_list *a, t_list *b, t_chnkr *cc);
-int		push_to_low_and_rotate(t_list *a, t_list *b, t_chnkr *cc, int chunk_size);
-int		increase_current_chunks(t_chnkr *cc, int chunk_size);
+int		push_to_low_and_rotate(t_list *a, t_list *b, t_chnkr *cc);
+int		increase_current_chunks(t_list *a, t_chnkr *cc);
 
 //------------------------04_calculate_rotations.c---------------------------//
 int		calc_rotations(t_list *a, t_list *b);
@@ -106,7 +108,7 @@ int		get_next_rank(t_list *a, int curr_rank_bn);
 //--------------------------06_calculate_costs.c-----------------------------//
 int		calc_costs(t_list *a, t_list *b);
 int		account_adjacency(t_list *a, t_node *curr_b);
-int		account_chunk_cost(t_list *a, t_list *b, t_node *curr_b);
+int		account_chunk_cost(t_list *a, t_node *curr_b);
 int		max(int a, int b);
 
 //----------------------------07_execute_sort.c------------------------------//
