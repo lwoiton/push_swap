@@ -29,6 +29,8 @@ void	analyse_ranks(t_list *a)
 	}
 	ft_sort_int_tab(sorted_a, a->size);
 	assign_ranks(a, sorted_a);
+	a->min_rank = get_min_rank(a);
+	a->max_rank = get_max_rank(a);
 	free(sorted_a);
 }
 

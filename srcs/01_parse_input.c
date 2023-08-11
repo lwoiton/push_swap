@@ -26,6 +26,7 @@ int	parse_input(int argc, char *argv[], t_list *a)
 	else
 	{
 	}
+	//determine if input is already sorted
 	determine_chunknr(a);
 	return (0);
 }
@@ -37,8 +38,10 @@ int	parse_string(char *argv[], t_list *a)
 
 	i = 0;
 	parsed_params = ft_split(argv[1], ' ');
-	while (parsed_params[i] != NULL  && check_input(parsed_params[i]) != -1)
+	while (parsed_params[i] != NULL)
 	{
+		if (check_input(parsed_params[i]) == -1)
+			return (-1);
 		ft_lstadd_back(a, ft_lstnew(ft_atoi(parsed_params[i])));
 		++i;
 	}
@@ -61,12 +64,16 @@ int	check_input(char *str)
 	return (0);
 }
 
+// isDiget and - minus
+// is in MAXINT and minINT range
+// check if input is already sorted
+
 int	parse_args(int argc, char *argv[], t_list *a)
 {
 	int	i;
 
 	i = 1;
-	while (i < argc  && check_input(argv[i]) != -1)
+	while (i < argc  && check_input(argv[i]))
 	{
 		ft_lstadd_back(a, ft_lstnew(ft_atoi(argv[i])));
 		i++;

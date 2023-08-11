@@ -24,7 +24,9 @@ void	ft_list_init(t_list *list)
 
 int	determine_chunknr(t_list *a)
 {
-	if (a->size > 5 && a->size <= 20)
+	if (a->size <= 5)
+		a->chunk_nr = 1;
+	else if (a->size > 5 && a->size <= 20)
 		a->chunk_nr = 2; 
 	else if (a->size > 20 && a->size <= 50)
 		a->chunk_nr = 3;

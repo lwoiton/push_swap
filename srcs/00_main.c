@@ -18,22 +18,30 @@ void	chunk_builder(t_list *a)
 	t_node	*sel_node;
 
 	ft_list_init(&b);
-	partition(a, &b);
-	sort_three(a);
-	while (b.size > 0)
+	if (a->size <= 5)
 	{
-		calc_rotations(a, &b);
-		calc_costs(a, &b);
-		sel_node = find_min_cost(&b);
-		execute(a, &b, sel_node);
+		sort_five(a, &b);
+		return ;
+	}
+	else
+	{
+		partition(a, &b);
+		sort_three(a);
+		while (b.size > 0)
+		{
+			calc_rotations(a, &b);
+			calc_costs(a, &b);
+			sel_node = find_min_cost(&b);
+			execute(a, &b, sel_node);
+		}
 	}
 }
 
 int	final_rotation(t_list *a)
 {
-	while (a->head->rank != 0 || a->head->prev->rank != a->max_rank)
+	while (a->head->rank != 0)
 	{
-		if (a->head->rank >= a->max_rank / 2)
+		if (a->head->rank > a->max_rank / 2)
 		{
 			rotate1(a);
 			ft_printf("ra\n");
@@ -56,6 +64,7 @@ t_node	*find_min_cost(t_list *b)
 
 	curr_b = b->head;
 	min_cost = curr_b->cost;
+	best_to_move = curr_b;
 	inter = 0;
 	while (inter++ < b->size)
 	{
@@ -93,6 +102,52 @@ int	sort_three(t_list *a)
 	return (0);
 }
 
+int	sort_five(t_list *a, t_list *b)
+{
+	presort_five(a, b);
+	sort_three(a);
+	while (b->size != 0)
+	{
+		if (b->head->rank > a->max_rank)
+		{
+			push(a, b);
+			ft_printf("pa\n");
+			rotate1(a);
+			ft_printf("ra\n");
+		}
+		else
+		{
+			push(a, b);
+			ft_printf("pa\n");
+			if (a->head->rank > a->head->next->rank)
+			{
+				swap(a);
+				ft_printf("sa\n");
+			}
+		}
+	}
+	return (0);
+}
+
+void    presort_five(t_list *a, t_list *b)
+{
+	while (a->size > 3)
+	{
+		if (a->head->rank == a->min_rank || \
+    		(a->head->rank == a->min_rank + 1 \
+        	&& a->head->rank != 3) || \
+        	a->head->rank == a->size + b->size)
+        	push(a, b);
+		else if (a->head->prev->rank == a->min_rank || \
+				(a->head->prev->rank == a->min_rank + 1 && \
+				a->head->prev->rank != 3) || \
+				a->head->prev->rank == a->size + b->size)
+			reverse_rotate1(a);
+			else
+			rotate1(a);
+    }
+}
+
 int	main(int argc, char *argv[])
 {
 	t_list	a;
@@ -101,7 +156,7 @@ int	main(int argc, char *argv[])
 	parse_input(argc, argv, &a);
 	analyse_ranks(&a);
 	chunk_builder(&a);
-//	final_rotation(&a);
+	final_rotation(&a);
 	free_list(&a);
 	return (0);
 }

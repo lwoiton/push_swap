@@ -6,13 +6,13 @@
 /*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:07:52 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/07/08 12:42:31 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/07/07 22:58:45 by luca             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin_gnl(char *s1, char *s2)
+char	*ft_gnl_strjoin(char *s1, char *s2)
 {
 	int		s1_len;
 	int		s2_len;
@@ -25,8 +25,8 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	}
 	if (!s1 || !s2)
 		return (NULL);
-	s1_len = ft_strlen_gnl(s1);
-	s2_len = ft_strlen_gnl(s2);
+	s1_len = ft_gnl_strlen(s1);
+	s2_len = ft_gnl_strlen(s2);
 	s_joined = (char *) malloc(s1_len + s2_len + 1);
 	if (!s_joined)
 		return (NULL);
@@ -39,7 +39,7 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 	return (s_joined - s1_len - s2_len);
 }
 
-char	*ft_substr_gnl(char *s, char *ln_break)
+char	*ft_gnl_substr(char *s, char *ln_break)
 {
 	char	*ss;
 	int		len;
@@ -47,17 +47,17 @@ char	*ft_substr_gnl(char *s, char *ln_break)
 	if (!s || !*s)
 		return (NULL);
 	if (!ln_break)
-		ln_break = ft_strchr_gnl(s, '\0') - 1;
+		ln_break = ft_gnl_strchr(s, '\0') - 1;
 	len = (ln_break - s) + 1;
 	ss = (char *) malloc(len + 1);
 	if (!ss)
 		return (NULL);
-	ft_strlcpy_gnl(ss, s, len + 1);
+	ft_gnl_strlcpy(ss, s, len + 1);
 	return (ss);
 }
 
 //Added the preliminary check for validity on s
-char	*ft_strchr_gnl(char *s, int c)
+char	*ft_gnl_strchr(char *s, int c)
 {
 	if (!s)
 		return (NULL);
@@ -73,7 +73,7 @@ char	*ft_strchr_gnl(char *s, int c)
 }
 
 //Added the preliminary check for validity on c
-size_t	ft_strlen_gnl(char const *c)
+size_t	ft_gnl_strlen(char const *c)
 {
 	size_t	len;
 
@@ -85,7 +85,7 @@ size_t	ft_strlen_gnl(char const *c)
 	return (len);
 }
 
-size_t	ft_strlcpy_gnl(char *dst, char *src, size_t size)
+size_t	ft_gnl_strlcpy(char *dst, char *src, size_t size)
 {
 	size_t	i;
 
@@ -99,5 +99,5 @@ size_t	ft_strlcpy_gnl(char *dst, char *src, size_t size)
 		}
 		dst[i] = '\0';
 	}
-	return (ft_strlen_gnl(src));
+	return (ft_gnl_strlen(src));
 }

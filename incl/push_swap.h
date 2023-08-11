@@ -75,6 +75,8 @@ int		push(t_list *dst, t_list *src);
 void	chunk_builder(t_list *a);
 t_node	*find_min_cost(t_list *b);
 int		sort_three(t_list *a);
+int		sort_five(t_list *a, t_list *b);
+void    presort_five(t_list *a, t_list *b);
 int		final_rotation(t_list *a);
 
 //----------------------------01_parse_input.c-------------------------------//
