@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:24:54 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/01/21 18:31:13 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/14 17:52:51 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_char_to_nbr(char c, int nbr)
+long	ft_char_to_nbr(char c, long nbr)
 {
-	nbr = nbr * 10 + (int)(c - 48);
+	nbr = nbr * 10 + (long)(c - 48);
 	return (nbr);
 }
 
-int	ft_atoi(const char *nptr)
+long	ft_atoi(const char *nptr)
 {
 	int	n;
-	int	nbr;
+	long	nbr;
 
 	n = 1;
 	nbr = 0;

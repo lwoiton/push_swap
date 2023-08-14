@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 02:49:27 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/10 16:09:03 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/14 18:05:33 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	parse_input(int argc, char *argv[], t_list *a)
 	return (rtrn);
 }
 
-int	is_intput_sorted(t_list *a)
+int	check_issorted(t_list *a)
 {
 	t_node	*curr_a;
 	int		rtrn;
@@ -48,23 +48,26 @@ int	parse_string(char *argv[], t_list *a)
 	char	**parsed_params;
 	int		i;
 	int		rtrn;
+	long		nbr;
 
 	parsed_params = ft_split(argv[1], ' ');
 	i = 0;
 	rtrn = 0;
 	while (parsed_params[i] != NULL && rtrn != -1)
 	{
-		if (check_input(parsed_params[i]) == -1)
+		if (check_isnumber(parsed_params[i]) == -1)
 			rtrn = -1;
-		if (check_max_min_int(argv[i]) == -1)
+		nbr = ft_atoi(argv[i]);
+		if (INT_MIN <= nbr && nbr <= INT_MAX)
+			ft_lstadd_back(a, ft_lstnew((int) nbr));
+		else
 			rtrn = -1;
-		ft_lstadd_back(a, ft_lstnew(ft_atoi(parsed_params[i])));
 		++i;
 	}
 	return (rtrn);
 }
 
-int	check_input(char *str)
+int	check_isnumber(char *str)
 {
 	int	i;
 	int rtrn;
@@ -73,55 +76,30 @@ int	check_input(char *str)
 	rtrn = 0;
 	while (str[i] && rtrn != -1)
 	{
-		if(!ft_isdigit(str[i]) && str[i] != '-')
+		if(!ft_isdigit(str[i]) && str[i] != '-' && str[i] != '+')
 			rtrn = -1;
 		i++;
 	}
 	return (rtrn);
 }
 
-int	check_max_min_int(char *nptr)
-{
-	int	n;
-	long long	nbr;
-
-	n = 1;
-	nbr = 0;
-	while (*nptr && (*nptr == 32 || (*nptr >= 9 && *nptr <= 13)))
-		nptr++;
-	if (*nptr == '-')
-	{
-		n = -1;
-		nptr++;
-	}
-	else if (*nptr == '+')
-		nptr++;
-	while (*nptr && *nptr >= '0' && *nptr <= '9')
-	{
-		nbr = nbr * 10 + (long long)(*nptr - 48);
-		nptr++;
-	}
-	if (n == 1 && nbr > 2147483647)
-		return (-1);
-	else if (n == -1 && nbr > 2147483648)
-		return (-1);
-	return (0);
-}
-
 int	parse_args(int argc, char *argv[], t_list *a)
 {
 	int	i;
 	int	rtrn;
+	long	nbr;
 
 	i = 1;
 	rtrn = 0;
 	while (i < argc  && rtrn != -1)
 	{
-		if (check_input(argv[i]) == -1)
+		if (check_isnumber(argv[i]) == -1)
 			rtrn = -1;
-		if (check_max_min_int(argv[i]) == -1)
+		nbr = ft_atoi(argv[i]);
+		if (INT_MIN <= nbr && nbr <= INT_MAX)
+			ft_lstadd_back(a, ft_lstnew((int) nbr));
+		else
 			rtrn = -1;
-		ft_lstadd_back(a, ft_lstnew(ft_atoi(argv[i])));
 		i++;
 	}
 	return (rtrn);

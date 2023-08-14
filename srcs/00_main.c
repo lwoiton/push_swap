@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:57:19 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/10 16:56:22 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/14 18:03:07 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,24 +137,24 @@ void    presort_five(t_list *a, t_list *b)
     		(a->head->rank == a->min_rank + 1 \
         	&& a->head->rank != 3) || \
         	a->head->rank == a->size + b->size)
-        	{
-				push(b, a);
-				ft_printf("pb\n");
-			}
+        {
+			push(b, a);
+			ft_printf("pb\n");
+		}
 		else if (a->head->prev->rank == a->min_rank || \
 				(a->head->prev->rank == a->min_rank + 1 && \
 				a->head->prev->rank != 3) || \
 				a->head->prev->rank == a->size + b->size)
-			{
-				reverse_rotate1(a);
-				ft_printf("rra\n");
-			}
-			else
-			{
-				rotate1(a);
-				ft_printf("ra\n");
-			}
-    }
+		{
+			reverse_rotate1(a);
+			ft_printf("rra\n");
+		}
+		else
+		{
+			rotate1(a);
+			ft_printf("ra\n");
+		}
+	}
 }
 
 int	main(int argc, char *argv[])
@@ -168,7 +168,7 @@ int	main(int argc, char *argv[])
 		free_list(&a);
 		return (0);
 	}
-	else if (is_intput_sorted(&a) == 1)
+	else if (check_issorted(&a) == 1)
 	{
 		ft_printf("\n");
 		free_list(&a);
