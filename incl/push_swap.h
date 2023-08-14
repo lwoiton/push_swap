@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 19:05:04 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/14 18:02:15 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/14 20:29:14 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int		parse_string(char *argv[], t_list *a);
 int		parse_args(int argc, char *argv[], t_list *a);
 int		check_isnumber(char *str);
 int		check_issorted(t_list *a);
+int		check_isduplicated(t_list *a, int nbr);
 
 //---------------------------02_analyse_ranks.c------------------------------//
 void	analyse_ranks(t_list *a);

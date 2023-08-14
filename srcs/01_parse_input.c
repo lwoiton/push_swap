@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 02:49:27 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/14 18:05:33 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/14 20:33:30 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,24 @@ int	check_issorted(t_list *a)
 	return (rtrn);
 }
 
+int	check_isduplicated(t_list *a, int nbr)
+{
+	t_node	*curr_a;
+	int	rtrn;
+
+	curr_a = a->head;
+	rtrn = 0;
+	if (a->head == NULL)
+		return (rtrn);
+	while (curr_a->next != a->head)
+	{
+		if (curr_a->content == nbr)
+			rtrn = -1;
+		curr_a = curr_a->next;
+	}
+	return (rtrn);
+}
+
 int	parse_string(char *argv[], t_list *a)
 {
 	char	**parsed_params;
@@ -58,7 +76,7 @@ int	parse_string(char *argv[], t_list *a)
 		if (check_isnumber(parsed_params[i]) == -1)
 			rtrn = -1;
 		nbr = ft_atoi(argv[i]);
-		if (INT_MIN <= nbr && nbr <= INT_MAX)
+		if (INT_MIN <= nbr && nbr <= INT_MAX && !check_isduplicated(a, nbr))
 			ft_lstadd_back(a, ft_lstnew((int) nbr));
 		else
 			rtrn = -1;
@@ -96,7 +114,7 @@ int	parse_args(int argc, char *argv[], t_list *a)
 		if (check_isnumber(argv[i]) == -1)
 			rtrn = -1;
 		nbr = ft_atoi(argv[i]);
-		if (INT_MIN <= nbr && nbr <= INT_MAX)
+		if (INT_MIN <= nbr && nbr <= INT_MAX && !check_isduplicated(a, nbr))
 			ft_lstadd_back(a, ft_lstnew((int) nbr));
 		else
 			rtrn = -1;
