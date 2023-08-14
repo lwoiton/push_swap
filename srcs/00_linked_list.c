@@ -91,6 +91,8 @@ int	free_list(t_list *list)
 {
 	t_node *tmp;
 
+	if (list->head == NULL)
+		return (0);
 	while (list->head != list->head->next)
 	{
 		tmp = list->head;

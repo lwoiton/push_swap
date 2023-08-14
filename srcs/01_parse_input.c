@@ -14,69 +14,115 @@
 
 int	parse_input(int argc, char *argv[], t_list *a)
 {
+	int	rtrn;
+
+	rtrn = 0;
 	if (argc < 2)
-	{
-		ft_printf("Error\n");
-		return (-1);
-	}
-	else if (argc == 2 && ft_strchr(argv[1], ' '))
-		parse_string(argv, a);
+		rtrn = -1;
+	else if (argc == 2)
+		rtrn = parse_string(argv, a);
 	else if (argc > 2)
-		parse_args(argc, argv, a);
-	else
-	{
-	}
-	//determine if input is already sorted
+		rtrn = parse_args(argc, argv, a);
 	determine_chunknr(a);
-	return (0);
+	return (rtrn);
+}
+
+int	is_intput_sorted(t_list *a)
+{
+	t_node	*curr_a;
+	int		rtrn;
+
+	curr_a = a->head;
+	rtrn = 1;
+	while (curr_a->next != a->head)
+	{
+		if (curr_a->content > curr_a->next->content)
+			rtrn = 0;
+		curr_a = curr_a->next;
+	}
+	return (rtrn);
 }
 
 int	parse_string(char *argv[], t_list *a)
 {
 	char	**parsed_params;
 	int		i;
+	int		rtrn;
 
-	i = 0;
 	parsed_params = ft_split(argv[1], ' ');
-	while (parsed_params[i] != NULL)
+	i = 0;
+	rtrn = 0;
+	while (parsed_params[i] != NULL && rtrn != -1)
 	{
 		if (check_input(parsed_params[i]) == -1)
-			return (-1);
+			rtrn = -1;
+		if (check_max_min_int(argv[i]) == -1)
+			rtrn = -1;
 		ft_lstadd_back(a, ft_lstnew(ft_atoi(parsed_params[i])));
 		++i;
 	}
-	return (0);
+	return (rtrn);
 }
 
 int	check_input(char *str)
 {
-	while (*str)
+	int	i;
+	int rtrn;
+
+	i = 0;
+	rtrn = 0;
+	while (str[i] && rtrn != -1)
 	{
-		if(ft_isdigit(*str))
-		{}
-		else
-		{
-			ft_printf("Error\n");
-			return (-1);
-		}
-		str++;
+		if(!ft_isdigit(str[i]) && str[i] != '-')
+			rtrn = -1;
+		i++;
 	}
-	return (0);
+	return (rtrn);
 }
 
-// isDiget and - minus
-// is in MAXINT and minINT range
-// check if input is already sorted
+int	check_max_min_int(char *nptr)
+{
+	int	n;
+	long long	nbr;
+
+	n = 1;
+	nbr = 0;
+	while (*nptr && (*nptr == 32 || (*nptr >= 9 && *nptr <= 13)))
+		nptr++;
+	if (*nptr == '-')
+	{
+		n = -1;
+		nptr++;
+	}
+	else if (*nptr == '+')
+		nptr++;
+	while (*nptr && *nptr >= '0' && *nptr <= '9')
+	{
+		nbr = nbr * 10 + (long long)(*nptr - 48);
+		nptr++;
+	}
+	if (n == 1 && nbr > 2147483647)
+		return (-1);
+	else if (n == -1 && nbr > 2147483648)
+		return (-1);
+	return (0);
+}
 
 int	parse_args(int argc, char *argv[], t_list *a)
 {
 	int	i;
+	int	rtrn;
 
 	i = 1;
-	while (i < argc  && check_input(argv[i]))
+	rtrn = 0;
+	while (i < argc  && rtrn != -1)
 	{
+		if (check_input(argv[i]) == -1)
+			rtrn = -1;
+		if (check_max_min_int(argv[i]) == -1)
+			rtrn = -1;
 		ft_lstadd_back(a, ft_lstnew(ft_atoi(argv[i])));
 		i++;
 	}
-	return (0);
+	return (rtrn);
 }

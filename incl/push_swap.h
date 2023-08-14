@@ -84,6 +84,8 @@ int		parse_input(int argc, char *argv[], t_list *a);
 int		parse_string(char *argv[], t_list *a);
 int		parse_args(int argc, char *argv[], t_list *a);
 int		check_input(char *str);
+int		is_intput_sorted(t_list *a);
+int		check_max_min_int(char *nptr);
 
 //---------------------------02_analyse_ranks.c------------------------------//
 void	analyse_ranks(t_list *a);
