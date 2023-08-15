@@ -43,7 +43,6 @@ int	main(int argc, char *argv[])
 	while (line != NULL)
 	{
 		line = get_next_line(0);
-		ft_printf("line: %s\n", line);
   		if (ft_strncmp(line, "sa", 2) == 0)
 			swap(&a);
 		else if (ft_strncmp(line, "sb", 2) == 0)

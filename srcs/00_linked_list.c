@@ -6,40 +6,21 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 19:01:25 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/10 16:41:13 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/15 13:43:14 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_list_init(t_list *list)
+void	ft_list_init(t_list *list, char c)
 {
+	list->id = c;
 	list->size = 0;
 	list->chunk_nr = 0;
 	list->chunk_size = 0;
 	list->min_rank = INT_MAX;
 	list->max_rank = INT_MIN;
 	list->head = NULL;
-}
-
-int	determine_chunknr(t_list *a)
-{
-	if (a->size <= 5)
-		a->chunk_nr = 1;
-	else if (a->size > 5 && a->size <= 20)
-		a->chunk_nr = 2; 
-	else if (a->size > 20 && a->size <= 50)
-		a->chunk_nr = 3;
-	else if (a->size > 50 && a->size <= 100)
-		a->chunk_nr = 4;
-	else if (a->size > 100 && a->size <= 200)
-		a->chunk_nr = 5;
-	else if (a->size > 200 && a->size <= 400)
-		a->chunk_nr = 7;
-	else if (a->size > 400)
-		a->chunk_nr = 8;
-	a->chunk_size = (a->size + a->chunk_nr - 1) / a->chunk_nr;
-	return (0);
 }
 
 t_node	*ft_lstnew(int content)
@@ -89,7 +70,7 @@ int	ft_lstadd_back(t_list *list, t_node *node)
 
 int	free_list(t_list *list)
 {
-	t_node *tmp;
+	t_node	*tmp;
 
 	if (list->head == NULL)
 		return (0);

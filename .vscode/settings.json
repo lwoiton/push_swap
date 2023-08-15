@@ -15,6 +15,10 @@
         "initializer_list": "c",
         "ranges": "c",
         "span": "c",
-        "utility": "c"
+        "utility": "c",
+        "push_swap.h": "c",
+        "random": "c",
+        "bitset": "c",
+        "regex": "c"
     }
    }

@@ -15,6 +15,8 @@
 int	rotate1(t_list *list)
 {
 	list->head = list->head->next;
+	if (list->id != 0)
+		ft_printf("r%c\n", list->id);
 	return (0);
 }
 
@@ -22,12 +24,16 @@ int	rotate2(t_list *a, t_list *b)
 {
 	a->head = a->head->next;
 	b->head = b->head->next;
+	if (a->id != 0 && b->id != 0)
+		ft_printf("rr\n");
 	return (0);
 }
 
 int	reverse_rotate1(t_list *list)
 {
 	list->head = list->head->prev;
+	if (list->id != 0)
+		ft_printf("rr%c\n", list->id);
 	return (0);
 }
 
@@ -35,5 +41,7 @@ int	reverse_rotate2(t_list *a, t_list *b)
 {
 	a->head = a->head->prev;
 	b->head = b->head->prev;
+	if (a->id != 0 && b->id != 0)
+		ft_printf("rrr\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/11 17:15:14 by lwoiton           #+#    #+#              #
-#    Updated: 2023/08/14 18:09:02 by lwoiton          ###   ########.fr        #
+#    Updated: 2023/08/15 13:10:35 by lwoiton          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,22 +22,27 @@ IFLAGS = -I$(INC_DIR) -I$(LIB_DIR)/$(INC_DIR)
 # Directories
 SRC_DIR = srcs
 OBJ_DIR = objs
+BNS_DIR = bonus
 INC_DIR = incl
 LIB_DIR = libft
 
 # Source files
-SRC_FILES = 00_main.c \
-            00_linked_list.c \
+SRC_FILES = 00_linked_list.c \
             00_rotate_operations.c \
             00_stack_operations.c \
-            01_parse_input.c \
-            02_analyse_ranks.c \
-            03_pre_sort.c\
-            04_calculate_rotations.c \
-            05_read_ranks.c \
-            06_calculate_costs.c \
-            07_execute_sort.c \
+            01_main.c \
+            02a_parse_input.c \
+            02b_check_input.c \
+            03_analyse_ranks.c \
+            04_divide_into_chunks.c \
+            05_sort_five.c \
+            06a_calculate_rotations.c \
+            06b_read_ranks.c \
+            07_calculate_costs.c \
+            08_execute_sort.c \
             utils_display_linked_list.c
+
+BNS_FILES = 
 
 # Object files
 OBJ_FILES = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
@@ -63,6 +68,10 @@ $(OBJ_DIR):
 # Rule to build the libft library	
 $(LIBFT):
 	$(MAKE) -C $(LIB_DIR)
+
+# Rule to build the bonus executable (checker)
+#bonus: $(OBJ_FILES) $(LIBFT)
+#    $(CC) $(DFLAGS) $(CFLAGS) $(IFLAGS) -o checker $^
 
 # Clean generated files
 clean:
