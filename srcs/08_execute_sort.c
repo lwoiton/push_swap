@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 03:51:30 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/15 13:26:17 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/15 16:54:04 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	execute_rotation_a(t_list *a, t_node *sel_node)
 {
 	while (sel_node->ra > 0)
 	{
+		ft_printf("t4\n");
 		rotate1(a);
 		sel_node->ra--;
 	}
@@ -69,9 +70,10 @@ int	push_sel_node(t_list *a, t_list *b, t_node *sel_node)
 
 int	final_rotation(t_list *a)
 {
+	a->max_rank = get_max_rank(a);
 	while (a->head->rank != 0)
 	{
-		if (a->head->rank > a->max_rank / 2)
+		if (a->head->rank >= a->max_rank / 2)
 			rotate1(a);
 		else
 			reverse_rotate1(a);

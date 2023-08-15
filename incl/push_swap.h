@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 19:05:04 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/15 13:46:30 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/15 16:39:42 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	relink_nodes_for_push(t_list *dst, t_list *src);
 int		push(t_list *dst, t_list *src);
 
 //--------------------------------01_main.c---------------------------------//
-void	sort(t_list *a, t_list *b);
+void	sort(t_list *a);
 
 //-----------------------------02a_parse_input.c-----------------------------//
 int		parse_string(char *argv[], t_list *a);
@@ -104,7 +104,6 @@ void	divide_into_chunks(t_list *a, t_list *b);
 void    push_two_elements_to_b(t_list *a, t_list *b);
 int		sort_three(t_list *a);
 int		sort_five(t_list *a, t_list *b);
-//void	presort(t_list *a, t_list *b);
 
 //------------------------06a_calculate_rotations.c---------------------------//
 int		calc_rotations(t_list *a, t_list *b);

@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:47:07 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/15 13:49:31 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/15 16:48:02 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	sort_three(t_list *a)
 
 int	sort_five(t_list *a, t_list *b)
 {
+	a->min_rank = get_min_rank(a);
 	push_two_elements_to_b(a, b);
 	sort_three(a);
 	while (a->size < 5)
@@ -66,15 +67,3 @@ int	sort_five(t_list *a, t_list *b)
 	}
 	return (0);
 }
-
-/* void	presort(t_list *a, t_list *b)
-{
-	if (a->size <= 5)
-		sort_five(a, b);
-	else
-	{
-		divide_into_chunks(a, b);
-		sort_three(a);
-	}
-	return ;
-} */

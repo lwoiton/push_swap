@@ -3,42 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwoiton <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 20:34:22 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/14 21:26:12 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/15 17:06:19 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	parse_input(int argc, char *argv[], t_list *a)
+int	test_input(int argc, char *argv[], t_list *a)
 {
 	if (parse_input(argc, argv, a) == -1)
 	{
-// check with gnl		ft_printf("Error\n");
 		free_list(a);
+		return (-1);
 	}
-
-	else if (check_issorted(a) == 1)
+	if (check_issorted(a) == 1)
 	{
-		ft_printf("\n");
 		free_list(a);
-		return (0);
+		return (1);
 	}
 	return (0);
 }
 
 int	main(int argc, char *argv[])
 {
+	char	*line;
 	t_list	a;
 	t_list	b;
 
-	ft_list_init(&a);
-	ft_list_init(&b);
-	parse_input(argc, argv, &a);
-	char	*line;
-
+	ft_list_init(&a, 0);
+	ft_list_init(&b, 0);
+	if (test_input(argc, argv, a) == -1 || test_input(argc, argv, b) == 1)
+		return (-1);
+	print_stacks(&a, &b);
 	line = "s";
 	while (line != NULL)
 	{
@@ -48,10 +47,7 @@ int	main(int argc, char *argv[])
 		else if (ft_strncmp(line, "sb", 2) == 0)
 			swap(&b);
 		else if (ft_strncmp(line, "ss", 2) == 0)
-		{
-			swap(&a);
-			swap(&b);
-		}
+			swap2(&a, &b, 0);
 		else if (ft_strncmp(line, "pa", 2) == 0)
 			push(&a, &b);
 		else if (ft_strncmp(line, "pb", 2) == 0)
@@ -72,7 +68,6 @@ int	main(int argc, char *argv[])
 			ft_printf("Error\n");
 		free(line);
 	}
-	print_stacks(&a, &b);
 
 	return (0);
 	//Read in similar values as for push swap using same methods!

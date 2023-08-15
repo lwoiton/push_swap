@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:09:27 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/15 13:47:31 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/15 13:52:59 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	check_issorted(t_list *a)
 	t_node	*curr_a;
 	int		rtrn;
 
+	if (a->head == NULL)
+		return (1);
 	curr_a = a->head;
 	rtrn = 1;
 	while (curr_a->next != a->head)
