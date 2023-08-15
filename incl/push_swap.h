@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include "libft.h"
 # include "ft_printf.h"
+# include "get_next_line.h"
+
 
 # define NOT_IN_CHUNK_PANELTY 8
 # define INT_MAX 2147483647
