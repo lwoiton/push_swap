@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 19:05:04 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/16 14:16:53 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/16 15:47:56 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft.h"
-//# include "ft_printf.h"
-//# include "get_next_line.h"
 
 # define NOT_IN_CHUNK_PANELTY 8
 # define INT_MAX 2147483647
