@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 02:49:27 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/16 10:39:26 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/16 16:31:13 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ int	parse_string(char *argv[], t_list *a)
 	{
 		if (check_isnumber(parsed_params[i]) == -1)
 			rtrn = -1;
-		nbr = ft_atoi(argv[i]);
+		nbr = ft_atoi(parsed_params[i]);
 		if (INT_MIN <= nbr && nbr <= INT_MAX && !check_isduplicated(a, nbr))
 			ft_lstadd_back(a, ft_lstnew((int) nbr));
 		else
 			rtrn = -1;
 		++i;
 	}
+	free(parsed_params);
 	return (rtrn);
 }
 

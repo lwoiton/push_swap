@@ -2,4 +2,4 @@ checker_linux
 imgui.ini
 push_swap_visualizer/
 *.o
-
+*.vscode
