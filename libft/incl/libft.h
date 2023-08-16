@@ -6,16 +6,16 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 19:18:42 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/14 17:51:58 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/16 15:59:57 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include<stddef.h>
-# include<stdlib.h>
-# include<unistd.h>
+# include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
 # include "ft_printf.h"
 # include "get_next_line.h"
 
