@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 12:27:23 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/15 16:54:50 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/16 11:16:54 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	divide_into_chunks(t_list *a, t_list *b)
 				a->head->rank < (a->size + b->size) - 5)
 		{
 			push(b, a);
-			cc.lo_chnk_cntr++;
+			cc.up_chnk_cntr++;
 		}
 		else if (a->head->rank / a->chunk_size == cc.lo_crr_chnk && \
 				a->head->rank < (a->size + b->size) - 5)

@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 03:51:30 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/15 16:54:04 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/15 17:12:15 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	execute_rotation_a(t_list *a, t_node *sel_node)
 {
 	while (sel_node->ra > 0)
 	{
-		ft_printf("t4\n");
 		rotate1(a);
 		sel_node->ra--;
 	}

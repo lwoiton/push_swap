@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:47:07 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/15 16:48:02 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/16 11:45:23 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	push_two_elements_to_b(t_list *a, t_list *b)
 			reverse_rotate1(a);
 		else
 			rotate1(a);
+		a->min_rank = get_min_rank(a);
+		a->max_rank = get_max_rank(a);
 	}
 }
 
@@ -51,7 +53,9 @@ int	sort_five(t_list *a, t_list *b)
 	a->min_rank = get_min_rank(a);
 	push_two_elements_to_b(a, b);
 	sort_three(a);
-	while (a->size < 5)
+	if (a->size + b->size > 5)
+		return (0);
+	while (a->size < 5 && b->size != 0)
 	{
 		if (b->head->rank > a->max_rank)
 		{

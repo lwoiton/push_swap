@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 18:24:54 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/14 17:52:51 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/16 14:16:01 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ long	ft_char_to_nbr(char c, long nbr)
 
 long	ft_atoi(const char *nptr)
 {
-	int	n;
+	int		n;
 	long	nbr;
 
 	n = 1;

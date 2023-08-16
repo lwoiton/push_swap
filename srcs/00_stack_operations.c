@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 03:10:27 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/15 13:49:45 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/16 14:15:46 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	swap(t_list *list)
 {
+	if (list->head == NULL)
+		return (-1);
 	list->head->prev->next = list->head->next;
 	list->head->next->prev = list->head->prev;
 	list->head->prev = list->head->next;
@@ -41,7 +43,7 @@ int	swap2(t_list *a, t_list *b, int print)
 	return (0);
 }
 
-void	relink_nodes_for_push(t_list *dst, t_list *src)
+void	relink_first_node_for_push(t_list *dst, t_list *src)
 {
 	dst->head = src->head;
 	src->head->next->prev = src->head->prev;
@@ -52,12 +54,25 @@ void	relink_nodes_for_push(t_list *dst, t_list *src)
 	return ;
 }
 
+void	relink_last_node_for_push(t_list *dst, t_list *src)
+{
+	src->head->next = dst->head;
+	src->head->prev = dst->head->prev;
+	dst->head->prev->next = src->head;
+	dst->head->prev = src->head;
+	dst->head = src->head;
+	src->head = NULL;
+	return ;
+}
+
 int	push(t_list *dst, t_list *src)
 {
-	if (src->size == 0)
+	if (src->head == NULL)
 		return (-1);
 	if (dst->head == NULL )
-		relink_nodes_for_push(dst, src);
+		relink_first_node_for_push(dst, src);
+	else if (src->head->next == src->head)
+		relink_last_node_for_push(dst, src);
 	else
 	{
 		src->head->next->prev = src->head->prev;

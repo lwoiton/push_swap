@@ -6,7 +6,7 @@
 #    By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/11 17:15:14 by lwoiton           #+#    #+#              #
-#    Updated: 2023/08/15 16:09:11 by lwoiton          ###   ########.fr        #
+#    Updated: 2023/08/16 12:43:33 by lwoiton          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,25 +58,24 @@ HEADER_FILES = $(wildcard $(INC_DIR)/*.h)
 # Libraries
 LIBFT = $(LIB_DIR)/libft.a
 
-
-# Default target
+# Default targets
 all: $(PUSH_SWAP_NAME)
 bonus: $(CHECKER_NAME)
 
 # Rule to build the push_swap executable
 $(PUSH_SWAP_NAME): $(PUSH_SWAP_OBJ_FILES) $(LIBFT)
-	$(CC) $(CFLAGS) $(IFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) $(IFLAGS) -g -o $@ $^
 
 # Rule to build the checker executable
 $(CHECKER_NAME): $(CHECKER_OBJ_FILES) $(LIBFT)
-	$(CC) $(CFLAGS) $(IFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) $(IFLAGS) -g -o $@ $^
 
 # Rule to build object files and include header dependencies
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER_FILES) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(IFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) $(IFLAGS) -g -c -o $@ $<
 
 $(BONUS_OBJ_DIR)/%.o: $(BONUS_DIR)/%.c $(HEADER_FILES) | $(BONUS_OBJ_DIR)
-	$(CC) $(CFLAGS) $(IFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) $(IFLAGS) -g -c -o $@ $<
 
 # Rule to create the object directory
 $(OBJ_DIR):

@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 02:49:27 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/15 13:43:02 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/16 10:39:26 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	parse_input(int argc, char *argv[], t_list *a)
 
 	rtrn = 0;
 	if (argc < 2)
-		rtrn = -1;
+		rtrn = 0;
 	else if (argc == 2)
 		rtrn = parse_string(argv, a);
 	else if (argc > 2)

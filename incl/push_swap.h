@@ -6,7 +6,7 @@
 /*   By: lwoiton <lwoiton@student.42prague.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 19:05:04 by lwoiton           #+#    #+#             */
-/*   Updated: 2023/08/15 16:39:42 by lwoiton          ###   ########.fr       */
+/*   Updated: 2023/08/16 14:16:53 by lwoiton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft.h"
-# include "ft_printf.h"
-# include "get_next_line.h"
-
+//# include "ft_printf.h"
+//# include "get_next_line.h"
 
 # define NOT_IN_CHUNK_PANELTY 8
 # define INT_MAX 2147483647
@@ -72,7 +71,8 @@ int		reverse_rotate2(t_list *a, t_list *b);
 //--------------------------00_stack_operations.c---------------------------//
 int		swap(t_list *list);
 int		swap2(t_list *a, t_list *b, int print);
-void	relink_nodes_for_push(t_list *dst, t_list *src);
+void	relink_first_node_for_push(t_list *dst, t_list *src);
+void	relink_last_node_for_push(t_list *dst, t_list *src);
 int		push(t_list *dst, t_list *src);
 
 //--------------------------------01_main.c---------------------------------//
@@ -101,7 +101,7 @@ int		increase_current_chunks(t_list *a, t_chnkr *cc);
 void	divide_into_chunks(t_list *a, t_list *b);
 
 //------------------------------05_sort_five.c-------------------------------//
-void    push_two_elements_to_b(t_list *a, t_list *b);
+void	push_two_elements_to_b(t_list *a, t_list *b);
 int		sort_three(t_list *a);
 int		sort_five(t_list *a, t_list *b);
 
@@ -134,6 +134,9 @@ int		final_rotation(t_list *a);
 void	display_list(t_list *list);
 void	print_stacks(t_list *a, t_list *b);
 
-//-----------------------------bonus/checker.c------------------------------//
-int		checker(int argc, char *argv[], t_list *a);
+//---------------------------bonus/checker_bonus.c---------------------------//
+int		read_operations(t_list *a, t_list *b);
+int		execute_operation(char *operation, t_list *a, t_list *b);
+int		validate_input(int argc, char *argv[], t_list *a);
+int		error_exit(t_list *a, t_list *b);
 #endif
